@@ -8,8 +8,8 @@ The site is designed to bridge my academic research in **Cognitive Sciences** an
 ## 🚀 Key Features
 
 - **Bilingual Interface**: Seamlessly toggle between English and French.
-- **Auto-Language Detection**: Automatically detects the visitor's browser language to serve the most relevant version (EN/FR).
-- **Adaptive Theme**: Dark/Light mode toggle with a default "Light" setting for professional readability.
+- **Auto-Language Detection**: Smart language routing based on browser settings to instantly serve content in French or English.
+- **System-Aware Theme**: Automatically synchronizes with the user's OS preference (Dark or Light mode), featuring a professional Light mode fallback by default.
 - **Custom Navigation**: A minimalist "Macaron" menu for smooth, single-page navigation.
 - **Responsive Design**: Fully optimized for mobile, tablet, and desktop viewing.
 - **Custom Domain**: Hosted via GitHub Pages with a custom CNAME configuration.
