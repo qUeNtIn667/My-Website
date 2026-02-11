@@ -8,8 +8,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    
+    <div class="menu-macaron">
+        <button class="macaron-icon">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav class="macaron-nav">
+            <a href="#about">About</a>
+            <a href="#websites">Websites</a>
+            <a href="#education">Education</a>
+            <a href="#expertise">Expertise</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
+
     <header>
-        <div class="header-text">
+        <div class="header-text" id="about">
             <span class="name-brand">Quentin Gaie</span>
             <nav>Industrial PhD Researcher in Psychology | Human-Robot Interaction × Alzheimer's Disease</nav>
         </div>
@@ -33,7 +47,7 @@
             </p>
         </section>
 
-        <section class="section-container">
+        <section class="section-container" id="websites">
             <h2 class="section-title">Useful Websites</h2>
             <div class="links-grid">
                 <a href="https://www.insei.fr/recherche/quentin-gaie" class="link-card" target="_blank">
@@ -69,7 +83,7 @@
             </div>
         </section>
 
-        <section class="section-container">
+        <section class="section-container" id="education">
             <h2 class="section-title">Education</h2>
             <div class="row">
                 <span class="row-main">PhD in Psychology & Human-Robot Interaction</span>
@@ -95,7 +109,7 @@
             </div>
         </section>
 
-        <section class="section-container">
+        <section class="section-container" id="expertise">
             <h2 class="section-title">Interests & Expertise</h2>
             <div class="interests-tags">
                 <span class="tag">Human-Robot Interaction</span>
@@ -111,7 +125,7 @@
             </div>
         </section>
 
-        <section class="section-container">
+        <section class="section-container" id="contact">
             <h2 class="section-title">Contact</h2>
             <div class="contact-grid">
                 <a href="mailto:quentin.gaie@insei.fr" class="contact-link">quentin.gaie@insei.fr</a>
@@ -123,5 +137,10 @@
     <footer>
         <p>© 2026 QUENTIN GAIE — Industrial PhD Researcher (CIFRE)</p>
     </footer>
+
+    <a href="#about" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
 </body>
 </html>
