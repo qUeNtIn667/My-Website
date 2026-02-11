@@ -275,11 +275,16 @@
                 langText.innerText = 'EN';
             }
         });
+
         window.addEventListener('DOMContentLoaded', () => {
-            const userLang = navigator.language || navigator.userLanguage; 
+        const userLang = navigator.language || navigator.userLanguage; 
+    
             if (userLang.startsWith('fr')) {
             body.classList.add('fr-mode');
             langText.innerText = 'FR';
+        } else {
+            body.classList.add('light-mode');
+            langText.innerText = 'EN';
         }
 });
     </script>
