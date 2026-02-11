@@ -278,13 +278,22 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             const userLang = navigator.language || navigator.userLanguage; 
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             if (userLang.startsWith('fr')) {
                 body.classList.add('fr-mode');
                 langText.innerText = 'FR';
             } else {
                 langText.innerText = 'EN';
             }
+            if (prefersDark) {
+                body.classList.remove('light-mode');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                body.classList.add('light-mode');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
         });
     </script>
 </body>
 </html>
+
