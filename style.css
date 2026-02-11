@@ -49,6 +49,13 @@ body {
     position: fixed;
     left: 20px;
     z-index: 1000;
+    width: 45px;
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    transition: background 0.3s, color 0.3s, opacity 0.3s ease;
 }
 
 .menu-macaron { top: 20px; padding-bottom: 20px; }
@@ -167,5 +174,5 @@ footer {
     h1 { font-size: 2.2rem; }
     .links-grid, .row { grid-template-columns: 1fr; gap: 10px; }
     .row-date { text-align: left; }
-    .theme-switch, .menu-macaron, .lang-switch { left: 10px; }
+    .theme-switch, .menu-macaron, .lang-switch { left: 15px; }
 }
