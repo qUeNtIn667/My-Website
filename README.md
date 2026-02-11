@@ -1,1 +1,32 @@
-# Website
+# Quentin Gaie — Professional Portfolio
+### Industrial PhD Researcher | Human-Robot Interaction & Cognitive Psychology
+
+This repository contains the source code for my professional portfolio, accessible at [quentin.gaie.fr](https://quentin.gaie.fr).
+
+The site is designed to bridge my academic research in **Cognitive Sciences** and my applied work in **Human Factors**, specifically focusing on robotic mediations for patients with neurocognitive disorders (Alzheimer's disease).
+
+## 🚀 Key Features
+
+- **Bilingual Interface**: Seamlessly toggle between English and French.
+- **Auto-Language Detection**: Automatically detects the visitor's browser language to serve the most relevant version (EN/FR).
+- **Adaptive Theme**: Dark/Light mode toggle with a default "Light" setting for professional readability.
+- **Custom Navigation**: A minimalist "Macaron" menu for smooth, single-page navigation.
+- **Responsive Design**: Fully optimized for mobile, tablet, and desktop viewing.
+- **Custom Domain**: Hosted via GitHub Pages with a custom CNAME configuration.
+
+## 🛠️ Built With
+
+- **HTML5**: Semantic structure for accessibility and SEO.
+- **CSS3**: Custom styling with CSS Variables (Custom Properties) for theme management and smooth transitions.
+- **Vanilla JavaScript**: Lightweight logic for theme switching, language toggling, and automated detection.
+- **FontAwesome**: Scalable vector icons for professional visual cues.
+
+## 📂 Project Structure
+
+```text
+├── index.html                # Main entry point (Structure & Content)
+├── style.css                 # Styling, Layout & Theme variables
+├── CNAME                     # Custom domain configuration (quentin.gaie.fr)
+├── Linkedin Profile Pic.jpeg # Profile picture
+├── Bannière.png              # Partners & Funding banner
+└── README.md                 # Project documentation
