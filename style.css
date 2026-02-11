@@ -93,6 +93,26 @@ body.light-mode .link-card .category, body.light-mode .link-card .icon { color: 
 .row-date { text-align: right; color: var(--gray); font-size: 0.9rem; }
 .row-main small { color: var(--gray); font-style: italic; }
 
+.row-exp {
+    padding: 25px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.exp-desc {
+    margin-top: 12px;
+    font-size: 0.95rem;
+    color: var(--gray);
+    max-width: 850px;
+    line-height: 1.5;
+}
+
 .partners-logos { display: flex; justify-content: center; }
 .partner-logo { max-width: 100%; height: auto; }
 
