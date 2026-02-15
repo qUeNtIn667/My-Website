@@ -35,10 +35,6 @@ body.fr-mode .lang-fr {
 
 html {
     scroll-behavior: smooth;
-}
-
-html {
-    scroll-behavior: smooth;
     margin: 0;
     padding: 0;
 }
@@ -194,3 +190,4 @@ footer {
     .row-date { text-align: left; }
     .theme-switch, .menu-macaron, .lang-switch { left: 15px; }
 }
+
