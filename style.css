@@ -42,11 +42,13 @@ html {
 body {
     background-color: var(--bg);
     color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 20px 10% 40px 10%;
     line-height: 1.6;
     transition: background 0.3s, color 0.3s, opacity 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .theme-switch, .menu-macaron, .lang-switch {
@@ -116,7 +118,7 @@ header {
 .profile-img { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); }
 .name-brand { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; display: block; }
 
-h1 { font-size: 3rem; line-height: 1.1; margin-bottom: 20px; }
+h1 { font-size: 3rem; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.02em; }
 .bio-text { color: var(--gray); font-size: 1.2rem; margin-bottom: 40px; }
 .bio-full { font-size: 1.15rem; line-height: 1.7; }
 .bio-full a { color: var(--text); font-weight: 600; }
@@ -139,7 +141,6 @@ body.light-mode .link-card .category, body.light-mode .link-card .icon { color: 
 .link-card:hover { transform: translateY(-5px); border-color: var(--gray); }
 
 .section-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin: 60px 0 30px; color: var(--gray); }
-
 .row { display: grid; grid-template-columns: 2fr 2fr 1fr; padding: 20px 0; border-bottom: 1px solid var(--border); align-items: center; }
 .row-date { text-align: right; color: var(--gray); font-size: 0.9rem; }
 .row-main small { color: var(--gray); font-style: italic; }
@@ -190,4 +191,3 @@ footer {
     .row-date { text-align: left; }
     .theme-switch, .menu-macaron, .lang-switch { left: 15px; }
 }
-
