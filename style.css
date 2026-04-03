@@ -54,7 +54,6 @@ body.fr-mode .lang-fr { display: inline; }
     line-height: 1.2;
 }
 
-.poster-link { color: var(--accent); font-weight: 600; text-decoration: none; }
 .poster-link:hover { text-decoration: underline; }
 
 .theme-switch, .menu-macaron, .lang-switch {
@@ -105,17 +104,12 @@ body.fr-mode .lang-fr { display: inline; }
 .macaron-nav {
     position: absolute; top: 50px; left: 0;
     background: var(--nav-bg); border: 1px solid var(--nav-border);
-    display: none; flex-direction: column; min-width: 180px;
-    border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-.macaron-nav a { color: var(--gray); padding: 12px 20px; text-decoration: none; font-size: 14px; }
+    display: none; flex-direction: column; min-width: 180px;}
 .macaron-nav a:hover { color: var(--accent); background: var(--border); }
 .menu-macaron:hover .macaron-nav { display: flex; }
-
 header {
     display: flex; justify-content: space-between; align-items: center;
-    margin-top: 20px; padding: 20px 0 0 50px; margin-bottom: 80px;
-}
+    margin-top: 20px; padding: 20px 0 0 50px; margin-bottom: 80px;}
 .profile-img {
     width: 85px; height: 85px; border-radius: 50%;
     object-fit: cover; border: 2px solid var(--border);
