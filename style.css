@@ -58,7 +58,7 @@ body.fr-mode .lang-fr { display: inline; }
 .poster-link:hover { text-decoration: underline; }
 
 .theme-switch, .menu-macaron, .lang-switch {
-    position: fixed; left: 20px; z-index: 1000;
+    position: fixed; left: 20px; z-index: 100;
     width: 45px; height: 45px; display: flex;
     justify-content: center; align-items: center;
 }
@@ -111,7 +111,8 @@ body.fr-mode .lang-fr { display: inline; }
 .macaron-nav {
     position: absolute; top: 50px; left: 0;
     background: var(--nav-bg); border: 1px solid var(--nav-border);
-    display: none; flex-direction: column; min-width: 180px; z-index: 9999;}
+    display: none; flex-direction: column; min-width: 180px; z-index: 1000;}
+.menu-macaron:hover { z-index: 999 !important;}
 .macaron-nav a:hover { color: var(--accent); background: var(--border); }
 .menu-macaron:hover .macaron-nav { display: flex; }
 header {
