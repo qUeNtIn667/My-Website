@@ -58,13 +58,23 @@ body.fr-mode .lang-fr { display: inline; }
 .poster-link:hover { text-decoration: underline; }
 
 .theme-switch, .menu-macaron, .lang-switch {
-    position: fixed; left: 20px; z-index: 100;
-    width: 45px; height: 45px; display: flex;
-    justify-content: center; align-items: center;
+    position: fixed; 
+    left: 20px; 
+    z-index: 100;
+    width: 45px; 
+    height: 45px; 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
 }
-.menu-macaron { top: 20px; position: relative; }
-.theme-switch { top: 75px; }
-.lang-switch  { top: 130px; }
+
+.menu-macaron { top: 20px; }
+.theme-switch { top: 80px; }
+.lang-switch  { top: 140px; }
+
+.menu-macaron:hover {
+    z-index: 9999 !important;
+}
 
 .macaron-icon {
     background: var(--border);
@@ -111,10 +121,10 @@ body.fr-mode .lang-fr { display: inline; }
 .macaron-nav {
     position: absolute; top: 50px; left: 0;
     background: var(--nav-bg); border: 1px solid var(--nav-border);
-    display: none; flex-direction: column; min-width: 180px; z-index: 1000;}
-.menu-macaron:hover { z-index: 999 !important;}
+    display: none; flex-direction: column; min-width: 180px; z-index: 9999;}
 .macaron-nav a:hover { color: var(--accent); background: var(--border); }
 .menu-macaron:hover .macaron-nav { display: flex; }
+
 header {
     display: flex; justify-content: space-between; align-items: center;
     margin-top: 20px; padding: 20px 0 0 50px; margin-bottom: 80px;}
