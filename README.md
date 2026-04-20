@@ -1,5 +1,5 @@
 # Quentin Gaie — Professional Portfolio
-### Industrial PhD Researcher | Human-Robot Interaction & Cognitive Psychology
+### [Industrial PhD Researcher | Psychology & Human-Robot Interaction](https://quentin.gaie.fr/)
 
 This repository contains the source code for my professional portfolio, accessible at [quentin.gaie.fr](https://quentin.gaie.fr).
 
