@@ -1,0 +1,5 @@
+# Robots.txt pour quentin.gaie.fr
+User-agent: *
+Allow: /
+
+Sitemap: https://quentin.gaie.fr/sitemap.xml
