@@ -1,4 +1,3 @@
-# Robots.txt pour quentin.gaie.fr
 User-agent: *
 Allow: /
 
