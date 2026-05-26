@@ -199,3 +199,61 @@ footer { margin-top: 100px; padding: 20px 0; border-top: 1px solid var(--border)
     .row-date { text-align: left; }
     .theme-switch, .menu-macaron, .lang-switch { left: 15px; }
 }
+
+.research-pages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+.research-page-card {
+    display: flex;
+    flex-direction: column;
+    padding: 28px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+.research-page-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.research-page-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gray);
+}
+.research-page-card:hover::before {
+    opacity: 1;
+}
+.research-page-card .card-icon {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+.research-page-card .card-title {
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+}
+.research-page-card .card-desc {
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.5;
+    flex: 1;
+}
+.research-page-card .card-arrow {
+    margin-top: 16px;
+    font-size: 0.8rem;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
