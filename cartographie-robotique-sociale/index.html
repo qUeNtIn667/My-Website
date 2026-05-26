@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartographie Robotique Sociale & IHR France | Quentin Gaie</title>
+    <meta name="description" content="Cartographie de la recherche française en Interaction Homme-Robot auprès des personnes âgées : équipes, labos, conférences, revues, financeurs et projets européens.">
+    <link rel="canonical" href="https://quentin.gaie.fr/cartographie-robotique-sociale">
+
+    <meta property="og:title" content="Cartographie IHR France | Quentin Gaie">
+    <meta property="og:description" content="French research landscape in Human-Robot Interaction for elderly people — teams, labs, conferences, journals, funders.">
+    <meta property="og:url" content="https://quentin.gaie.fr/cartographie-robotique-sociale">
+    <meta property="og:type" content="article">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" sizes="96x96" href="https://quentin.gaie.fr/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap&font-display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+
+    <style>
+        body:not(.fr-mode) .lang-fr { display: none; }
+        body.fr-mode .lang-en { display: none; }
+
+        .breadcrumb {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+            padding-left: 50px;
+            margin-top: 20px;
+        }
+        .breadcrumb a { color: var(--gray); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--text); }
+        .breadcrumb span { margin: 0 6px; }
+
+        .page-hero { padding: 30px 0 20px 50px; margin-bottom: 30px; }
+        .page-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gray);
+            margin-bottom: 14px;
+        }
+        .page-hero h1 {
+            font-size: 2.4rem;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .page-hero .subtitle {
+            color: var(--gray);
+            font-size: 1.05rem;
+            max-width: 680px;
+        }
+
+        @media (max-width: 768px) {
+            .page-hero { padding-left: 0; margin-top: 110px; }
+            .breadcrumb { padding-left: 0; margin-top: 110px; }
+        }
+
+        /* ── Category tabs / filter ── */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+        .filter-btn {
+            padding: 6px 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--gray);
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--text);
+            color: var(--bg);
+            border-color: var(--text);
+        }
+
+        /* ── Category heading ── */
+        .cat-heading {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gray);
+            margin: 50px 0 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cat-heading .cat-icon { font-size: 14px; }
+
+        /* ── Lab / institution card grid ── */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+        .inst-card {
+            padding: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            transition: border-color 0.2s;
+        }
+        .inst-card:hover { border-color: var(--gray); }
+        .inst-card .inst-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+        .inst-card .inst-univ {
+            font-size: 0.82rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        .inst-card .inst-focus {
+            font-size: 0.85rem;
+            color: var(--gray);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* ── Researcher list inside card ── */
+        .researcher-list {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .researcher-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 0.84rem;
+            padding: 4px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .researcher-item:last-child { border-bottom: none; }
+        .researcher-name { font-weight: 600; }
+        .researcher-role { color: var(--gray); font-size: 0.78rem; }
+        .researcher-spec {
+            color: var(--gray);
+            font-size: 0.78rem;
+            text-align: right;
+            max-width: 140px;
+            line-height: 1.3;
+        }
+
+        /* ── Simple table ── */
+        .table-scroll { overflow-x: auto; margin: 12px 0 30px; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+        th {
+            text-align: left;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--gray);
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+        td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+        tr:last-child td { border-bottom: none; }
+        td a { color: var(--text); text-decoration: none; font-size: 0.8rem; }
+        td a:hover { text-decoration: underline; }
+
+        /* Project highlight ── */
+        .project-card {
+            padding: 20px 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            margin-bottom: 12px;
+        }
+        .project-card.highlight { border-color: var(--text); }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .project-name { font-weight: 700; font-size: 1rem; }
+        .project-period { font-size: 0.82rem; color: var(--gray); }
+        .project-funding { font-size: 0.82rem; color: var(--gray); margin-bottom: 8px; }
+        .project-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.5; }
+
+        /* ── Note box ── */
+        .note-box {
+            border-left: 2px solid var(--gray);
+            padding: 12px 18px;
+            margin: 16px 0;
+            background: var(--card-bg);
+        }
+        .note-box p { margin: 0; font-size: 0.88rem; color: var(--gray); }
+
+        /* ── Update badge ── */
+        .update-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            background: var(--border);
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-left: 8px;
+        }
+    </style>
+</head>
+
+<body class="light-mode">
+
+    <div class="menu-macaron">
+        <button class="macaron-icon" title="Navigation" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav class="macaron-nav">
+            <a href="#researchers"><span class="lang-en">Researchers</span><span class="lang-fr">Chercheurs</span></a>
+            <a href="#labs"><span class="lang-en">Laboratories</span><span class="lang-fr">Laboratoires</span></a>
+            <a href="#conferences"><span class="lang-en">Conferences</span><span class="lang-fr">Conférences</span></a>
+            <a href="#journals"><span class="lang-en">Journals</span><span class="lang-fr">Revues</span></a>
+            <a href="#projects"><span class="lang-en">EU Projects</span><span class="lang-fr">Projets Européens</span></a>
+            <a href="#resources"><span class="lang-en">Resources & Funders</span><span class="lang-fr">Ressources & Financeurs</span></a>
+            <a href="/" style="border-top: 1px solid var(--border); margin-top: 4px; padding-top: 12px;">← <span class="lang-en">Back to CV</span><span class="lang-fr">Retour au CV</span></a>
+            <a href="/robzheimer">→ Rob'Zheimer</a>
+        </nav>
+    </div>
+
+    <div class="theme-switch" id="theme-toggle">
+        <button class="macaron-icon" title="Toggle Mode" aria-label="Theme">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+    </div>
+    <div class="lang-switch" id="lang-toggle">
+        <button class="macaron-icon" aria-label="Language">
+            <span id="lang-text" class="lang-text-small">EN</span>
+        </button>
+    </div>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Quentin Gaie</a>
+        <span>›</span>
+        <span class="lang-en">French HRI Research Landscape</span>
+        <span class="lang-fr">Cartographie Recherche Française IHR</span>
+    </nav>
+
+    <div class="page-hero">
+        <p class="page-tag">
+            <span class="lang-en">Reference Document · Updated May 2026</span>
+            <span class="lang-fr">Document de Référence · Mis à jour Mai 2026</span>
+        </p>
+        <h1>
+            <span class="lang-en">French HRI Research Landscape<br>for Elderly People</span>
+            <span class="lang-fr">Environnement Français de la Recherche<br>en IHR pour Personnes Âgées</span>
+        </h1>
+        <p class="subtitle">
+            <span class="lang-en">A structured map of French research teams, laboratories, conferences, journals and funding bodies working at the intersection of Human-Robot Interaction and ageing.</span>
+            <span class="lang-fr">Cartographie structurée des équipes de recherche, laboratoires, conférences, revues et financeurs français travaillant à l'intersection de l'Interaction Homme-Robot et du vieillissement.</span>
+        </p>
+    </div>
+
+    <main>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!-- I. RESEARCHERS & TEAMS -->
+        <!-- ══════════════════════════════════════════ -->
+        <section id="researchers">
+            <h2 class="section-title">
+                <span class="lang-en">I. Researchers & Teams</span>
+                <span class="lang-fr">I. Chercheurs & Équipes</span>
+            </h2>
+
+            <!-- HRI -->
+            <div class="cat-heading"><span class="cat-icon">🤖</span> <span class="lang-en">Human-Robot Interaction & Social Robotics</span><span class="lang-fr">Interaction Homme-Robot & Robotique Sociale</span></div>
+
+            <div class="card-grid">
+
+                <div class="inst-card">
+                    <p class="inst-name">Grhapes / INSEI — CY Cergy Paris Université</p>
+                    <p class="inst-focus"><span class="lang-en">Robotic mediations, Robot-Extension paradigm</span><span class="lang-fr">Médiations robotiques, paradigme Robot-Extension</span></p>
+                    <div class="researcher-list">
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Sophie Sakka</span><br><span class="researcher-role">Pr.</span></div>
+                            <span class="researcher-spec"><span class="lang-en">Social Robotics</span><span class="lang-fr">Robotique Sociale</span></span>
+                        </div>
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Quentin Gaie</span><br><span class="researcher-role"><span class="lang-en">PhD Candidate</span><span class="lang-fr">Doctorant</span></span></div>
+                            <span class="researcher-spec">Rob'Zheimer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inst-card">
+                    <p class="inst-name">Broca Living Lab — Paris Cité / AP-HP</p>
+                    <p class="inst-univ"><span class="lang-en">Geriatric Living Lab, Hôpital Broca (Paris 13e)</span><span class="lang-fr">Living Lab gériatrique, Hôpital Broca (Paris 13e)</span></p>
+                    <p class="inst-focus"><span class="lang-en">Cognitive psychology orientation</span><span class="lang-fr">Orientation psychologie cognitive</span></p>
+                    <div class="researcher-list">
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Anne-Sophie Rigaud</span><br><span class="researcher-role">PU-PH</span></div>
+                            <span class="researcher-spec"><span class="lang-en">Cognitive Psychology & Social Robotics</span><span class="lang-fr">Psychologie Cognitive & Robotique Sociale</span></span>
+                        </div>
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Maribel Pino</span><br><span class="researcher-role">MCF</span></div>
+                            <span class="researcher-spec"><span class="lang-en">Experimental Psychology & Social Robotics</span><span class="lang-fr">Psychologie Expérimentale & Robotique Sociale</span></span>
+                        </div>
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Lauriane Blavette</span><br><span class="researcher-role">Dr. (<span class="lang-en">Thesis</span><span class="lang-fr">Thèse</span> 2026)</span></div>
+                            <span class="researcher-spec">ARI + LLM ; NAO & COVID-19</span>
+                        </div>
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Manon Demange</span><br><span class="researcher-role">Dr. (<span class="lang-en">Thesis</span><span class="lang-fr">Thèse</span> 2019)</span></div>
+                            <span class="researcher-spec">PARO, <span class="lang-en">differential efficacy</span><span class="lang-fr">efficacité différentielle</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inst-card">
+                    <p class="inst-name">Paris Cité — <span class="lang-en">Cyberpsychology</span><span class="lang-fr">Cyberpsychologie</span></p>
+                    <p class="inst-focus"><span class="lang-en">Psychodynamic / psychoanalytic orientation</span><span class="lang-fr">Orientation psychodynamique / psychanalyse</span></p>
+                    <div class="researcher-list">
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Frédéric Tordo</span><br><span class="researcher-role"><span class="lang-en">Psychologist</span><span class="lang-fr">Psychologue</span></span></div>
+                            <span class="researcher-spec"><span class="lang-en">Cyberpsychology, robot acceptance</span><span class="lang-fr">Cyberpsychologie, acceptation robotique</span></span>
+                        </div>
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Serge Tisseron</span><br><span class="researcher-role"><span class="lang-en">Psychiatrist & Psychologist</span><span class="lang-fr">Psychiatre & Psychologue</span></span></div>
+                            <span class="researcher-spec">TEP <span class="lang-en">model</span><span class="lang-fr">modèle</span> (empathy with robots)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inst-card">
+                    <p class="inst-name">ISIR — Sorbonne / CNRS</p>
+                    <p class="inst-focus"><span class="lang-en">Interactive & autonomous robotics, human interaction</span><span class="lang-fr">Robotique interactive et autonome, interaction humaine</span></p>
+                    <div class="researcher-list">
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Vivianne Pasqui</span><br><span class="researcher-role">Pr.</span></div>
+                            <span class="researcher-spec"><span class="lang-en">Assistive robotics, elderly autonomy</span><span class="lang-fr">Robotique d'assistance, autonomie des PA</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inst-card">
+                    <p class="inst-name">ETIS — CY Cergy Paris Université</p>
+                    <p class="inst-focus"><span class="lang-en">Human-robot interaction modelling, emotions, embodied cognition</span><span class="lang-fr">Modélisation IHR, émotions, cognition incarnée</span></p>
+                    <div class="researcher-list">
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Lola Cañamero</span><br><span class="researcher-role">PU, Dir.</span></div>
+                            <span class="researcher-spec"><span class="lang-en">Robotic emotions & motivations</span><span class="lang-fr">Émotions & motivations robotiques</span></span>
+                        </div>
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Franciscoflavio Falcone</span><br><span class="researcher-role"><span class="lang-en">PhD Candidate</span><span class="lang-fr">Doctorant</span></span></div>
+                            <span class="researcher-spec"><span class="lang-en">Interaction modelling in institution</span><span class="lang-fr">Modélisation de l'interaction en institution</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inst-card">
+                    <p class="inst-name">Inria Grenoble — RobotLearn</p>
+                    <p class="inst-focus"><span class="lang-en">Audio-visual processing, social dialogue, robot navigation</span><span class="lang-fr">Traitement audiovisuel, dialogue social, navigation robotique</span></p>
+                    <div class="researcher-list">
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Xavier Alameda-Pineda</span><br><span class="researcher-role">CR Inria</span></div>
+                            <span class="researcher-spec">SPRING H2020</span>
+                        </div>
+                    </div>
+                    <div class="note-box" style="margin-top: 10px; padding: 8px 12px;">
+                        <p style="font-size: 0.78rem;">💡 <strong>SPRING H2020</strong> (2020–2023) : ARI robot deployed at Hôpital Broca. 8 partners, €8.3M.</p>
+                    </div>
+                </div>
+
+                <div class="inst-card">
+                    <p class="inst-name">LIG — Université Grenoble-Alpes</p>
+                    <p class="inst-focus"><span class="lang-en">Conversational robots, affective signal, speech, dialogue</span><span class="lang-fr">Robots conversationnels, signal affectif, parole, dialogue</span></p>
+                    <div class="researcher-list">
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Véronique Aubergé</span><br><span class="researcher-role">CR CNRS</span></div>
+                            <span class="researcher-spec"><span class="lang-en">Affective speech, social prosody</span><span class="lang-fr">Parole affective, prosodie sociale</span></span>
+                        </div>
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Damien Pellier</span><br><span class="researcher-role">Pr.</span></div>
+                            <span class="researcher-spec">AI, <span class="lang-en">autonomous robots</span><span class="lang-fr">robots autonomes</span></span>
+                        </div>
+                    </div>
+                    <div class="note-box" style="margin-top: 10px; padding: 8px 12px;">
+                        <p style="font-size: 0.78rem;">💡 <strong>SoRAIM Winter School</strong> — <span class="lang-en">International winter school on social robotics</span><span class="lang-fr">École d'hiver internationale sur la robotique sociale</span></p>
+                    </div>
+                </div>
+
+                <div class="inst-card">
+                    <p class="inst-name">LISN — Paris-Saclay</p>
+                    <p class="inst-focus">AI, <span class="lang-en">robotic ethics, NLP, affective computing</span><span class="lang-fr">éthique robotique, TAL, affect computationnel</span></p>
+                    <div class="researcher-list">
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Laurence Devillers</span><br><span class="researcher-role">Pr.</span></div>
+                            <span class="researcher-spec"><span class="lang-en">Affective AI, robotic ethics</span><span class="lang-fr">IA affective, éthique robotique</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inst-card">
+                    <p class="inst-name">LS2N — Centrale Nantes</p>
+                    <p class="inst-focus">Rob'Autisme, CHU Nantes</p>
+                    <div class="researcher-list">
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Rénald Gaboriau</span><br><span class="researcher-role">Dr., Co-founder HUTECH</span></div>
+                            <span class="researcher-spec">Rob'Autisme</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inst-card">
+                    <p class="inst-name">LAPSCO — Clermont-Auvergne / CNRS</p>
+                    <p class="inst-focus"><span class="lang-en">Social cognitive psychology. Robotic co-presence effects</span><span class="lang-fr">Psychologie sociale cognitive. Effets de la co-présence robotique</span></p>
+                    <div class="researcher-list">
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Clément Belletier</span><br><span class="researcher-role">MCF</span></div>
+                            <span class="researcher-spec"><span class="lang-en">Social robotic facilitator</span><span class="lang-fr">Facilitateur social robotique</span></span>
+                        </div>
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Pascal Huguet</span><br><span class="researcher-role">DRCE CNRS</span></div>
+                            <span class="researcher-spec"><span class="lang-en">Social & cognitive psychology</span><span class="lang-fr">Psychologie sociale et cognitive</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inst-card">
+                    <p class="inst-name">Inria Bordeaux</p>
+                    <div class="researcher-list">
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Bernard N'Kaoua</span><br><span class="researcher-role">Pr.</span></div>
+                            <span class="researcher-spec"><span class="lang-en">Ageing, technology & ecological environment</span><span class="lang-fr">Vieillissement, technologie et environnement écologique</span></span>
+                        </div>
+                        <div class="researcher-item">
+                            <div><span class="researcher-name">Kerem Tahan</span><br><span class="researcher-role">Dr. (<span class="lang-en">Thesis</span><span class="lang-fr">Thèse</span> 2026)</span></div>
+                            <span class="researcher-spec"><span class="lang-en">Robotic remediation in institution</span><span class="lang-fr">Remédiation robotique en Institution</span></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Psychology / Neuropsychology / Ageing -->
+            <div class="cat-heading" style="margin-top: 40px;"><span class="cat-icon">🧠</span> <span class="lang-en">Psychology / Neuropsychology / Alzheimer & Dementia</span><span class="lang-fr">Psychologie / Neuropsychologie / Alzheimer & Démence</span></div>
+
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span class="lang-en">Researcher</span><span class="lang-fr">Chercheur</span></th>
+                            <th><span class="lang-en">Affiliation</span><span class="lang-fr">Affiliation</span></th>
+                            <th><span class="lang-en">Role</span><span class="lang-fr">Rôle</span></th>
+                            <th><span class="lang-en">Specialty</span><span class="lang-fr">Spécialité</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Hanna Chainay</strong></td><td>EMC, Univ. Lumière Lyon 2</td><td>Pr.</td><td><span class="lang-en">Neuropsychology, Cognitive Sciences, Emotions</span><span class="lang-fr">Neuropsychologie, Sciences Cognitives, Émotions</span></td></tr>
+                        <tr><td><strong>Stéphane Epelbaum</strong></td><td>AP-HP / Sorbonne — Pitié-Salpêtrière</td><td>PU-PH</td><td><span class="lang-en">AD, memory unit IM2A, prion disease</span><span class="lang-fr">MA, unité mémoire IM2A, maladie à prions</span></td></tr>
+                        <tr><td><strong>Marc Verny</strong></td><td>Sorbonne / AP-HP Charles Foix</td><td>PU-PH</td><td>Neurogériatrie</td></tr>
+                        <tr><td><strong>Olivier Guérin</strong></td><td>Inria Nice / CoBTeK — CHU Nice</td><td>PU-PH</td><td><span class="lang-en">Clinical trials VR & EHPAD</span><span class="lang-fr">Investigateur principal essais cliniques RV & EHPAD</span></td></tr>
+                        <tr><td><strong>Philippe Robert</strong></td><td>Inria Nice / CoBTeK</td><td>DR Inria</td><td><span class="lang-en">Networks, algorithms, probabilities</span><span class="lang-fr">Réseaux, algorithmes et probabilités</span></td></tr>
+                        <tr><td><strong>Salvatore Anzalone</strong></td><td>CHArt, Paris 8</td><td>MCF</td><td><span class="lang-en">Engagement evaluation with social robots</span><span class="lang-fr">Évaluation de l'engagement avec les robots sociaux</span></td></tr>
+                        <tr><td><strong>Dimitri Delacroix</strong></td><td>Univ. Limoges</td><td>Dr., Co-founder HUTECH</td><td><span class="lang-en">Rob'Zheimer precursors</span><span class="lang-fr">Prémices Rob'Zheimer</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SoRAIM Winter School -->
+            <div class="cat-heading"><span class="cat-icon">❄️</span> SoRAIM Winter School — <span class="lang-en">Speakers 2026</span><span class="lang-fr">Intervenants 2026</span></div>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span class="lang-en">Speaker</span><span class="lang-fr">Intervenant</span></th>
+                            <th><span class="lang-en">Specialty</span><span class="lang-fr">Spécialité</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Prof. Magalie Ochs</strong></td><td><span class="lang-en">Social and affective signal processing</span><span class="lang-fr">Traitement du signal social et affectif</span></td></tr>
+                        <tr><td><strong>Prof. Silvia Rossi</strong></td><td><span class="lang-en">HRI and social robotics</span><span class="lang-fr">IHR et robotique sociale</span></td></tr>
+                        <tr><td><strong>Prof. Éva Székely</strong></td><td><span class="lang-en">Conversational speech synthesis</span><span class="lang-fr">Synthèse vocale conversationnelle</span></td></tr>
+                        <tr><td><strong>Dr. Christian Wolf</strong></td><td><span class="lang-en">Computer vision for social robots</span><span class="lang-fr">Vision par ordinateur pour robots sociaux</span></td></tr>
+                        <tr><td><strong>Dr. Maribel Pino</strong></td><td><span class="lang-en">Experimental psychology and social robotics</span><span class="lang-fr">Psychologie expérimentale et robotique sociale</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!-- II. LABORATORIES -->
+        <!-- ══════════════════════════════════════════ -->
+        <section id="labs">
+            <h2 class="section-title">
+                <span class="lang-en">II. Laboratories</span>
+                <span class="lang-fr">II. Laboratoires</span>
+            </h2>
+
+            <div class="cat-heading"><span class="cat-icon">🤖</span> <span class="lang-en">HRI & Social Robotics</span><span class="lang-fr">IHR & Robotique Sociale</span></div>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span class="lang-en">Laboratory</span><span class="lang-fr">Laboratoire</span></th>
+                            <th><span class="lang-en">University / Organisation</span><span class="lang-fr">Université / Organisme</span></th>
+                            <th><span class="lang-en">Orientation</span><span class="lang-fr">Orientation</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Grhapes / INSEI</strong></td><td>CY Cergy Paris Université</td><td><span class="lang-en">Robotic mediations, Robot-Extension</span><span class="lang-fr">Médiations robotiques, Robot-Extension</span></td></tr>
+                        <tr><td><strong>ETIS</strong></td><td>CY Cergy Paris Université</td><td><span class="lang-en">Neurocybernetics, robotic emotions</span><span class="lang-fr">Neurocybernétique, émotions robotiques</span></td></tr>
+                        <tr><td><strong>ISIR</strong></td><td>Sorbonne Université / CNRS</td><td><span class="lang-en">Intelligent robotics, human interaction</span><span class="lang-fr">Robotique intelligente, interaction humaine</span></td></tr>
+                        <tr><td><strong>CHArt</strong></td><td>Paris 8</td><td><span class="lang-en">Human and Artificial Cognition</span><span class="lang-fr">Cognition Humaine et Artificielle</span></td></tr>
+                        <tr><td><strong>LIG</strong></td><td>UGA</td><td><span class="lang-en">Conversational robots, affective AI</span><span class="lang-fr">Robots conversationnels, IA affective</span></td></tr>
+                        <tr><td><strong>LS2N</strong></td><td>Centrale Nantes</td><td><span class="lang-en">Robotics, therapeutic mediation</span><span class="lang-fr">Robotique, médiation thérapeutique</span></td></tr>
+                        <tr><td><strong>LISN</strong></td><td>Université Paris-Saclay</td><td>AI, <span class="lang-en">robotic ethics, NLP</span><span class="lang-fr">éthique robotique, TAL</span></td></tr>
+                        <tr><td><strong>LAPSCO</strong></td><td>Université Clermont-Auvergne / CNRS</td><td><span class="lang-en">Social psychology, humanoid robotics</span><span class="lang-fr">Psychologie sociale, robotique humanoïde</span></td></tr>
+                        <tr><td><strong>Inria Grenoble — RobotLearn</strong></td><td>Inria</td><td><span class="lang-en">Audio-visual perception, dialogue</span><span class="lang-fr">Perception audiovisuelle, dialogue</span></td></tr>
+                        <tr><td><strong>Inria Bordeaux</strong></td><td>Univ. Bordeaux</td><td><span class="lang-en">Autonomous learning, cognition, HRI</span><span class="lang-fr">Apprentissage autonome, cognition, IHR</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cat-heading"><span class="cat-icon">🧠</span> <span class="lang-en">Psychology / Neuropsychology / Ageing</span><span class="lang-fr">Psychologie / Neuropsychologie / Vieillissement</span></div>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span class="lang-en">Laboratory</span><span class="lang-fr">Laboratoire</span></th>
+                            <th><span class="lang-en">University / Hospital</span><span class="lang-fr">Université / Hôpital</span></th>
+                            <th><span class="lang-en">Orientation</span><span class="lang-fr">Orientation</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>EMC</strong></td><td>Univ. Lumière Lyon 2</td><td><span class="lang-en">Clinical neuropsychology, memory, emotion</span><span class="lang-fr">Neuropsychologie clinique, mémoire, émotion</span></td></tr>
+                        <tr><td><strong>LPNC</strong></td><td>UGA / CNRS</td><td><span class="lang-en">Psychology and NeuroCognition</span><span class="lang-fr">Psychologie et NeuroCognition</span></td></tr>
+                        <tr><td><strong>IM2A</strong></td><td>AP-HP Pitié-Salpêtrière</td><td><span class="lang-en">Memory unit & AD (clinical)</span><span class="lang-fr">Unité mémoire & MA (unité clinique)</span></td></tr>
+                        <tr><td><strong>Broca Living Lab</strong></td><td>AP-HP / Paris Cité</td><td><span class="lang-en">Geriatrics, social robotics, NPIs</span><span class="lang-fr">Gériatrie, robotique sociale, INM</span></td></tr>
+                        <tr><td><strong>CoBTeK</strong></td><td>Inria Nice / UCA</td><td><span class="lang-en">Technology, cognition, behaviour, knowledge</span><span class="lang-fr">Cognition, comportement, technologie, connaissance</span></td></tr>
+                        <tr><td><strong>ILVV</strong></td><td>CNRS, INSERM, CNAV, INED…</td><td><span class="lang-en">Institute of Longevity, Ageing</span><span class="lang-fr">Institut de la Longévité, Vieillesses & Vieillissement</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!-- III. CONFERENCES -->
+        <!-- ══════════════════════════════════════════ -->
+        <section id="conferences">
+            <h2 class="section-title">
+                <span class="lang-en">III. Conferences</span>
+                <span class="lang-fr">III. Conférences</span>
+            </h2>
+
+            <div class="cat-heading"><span class="cat-icon">🤖</span> <span class="lang-en">Human-Robot Interaction</span><span class="lang-fr">Interaction Homme-Robot</span></div>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span class="lang-en">Conference</span><span class="lang-fr">Conférence</span></th>
+                            <th><span class="lang-en">Organiser</span><span class="lang-fr">Organisateur</span></th>
+                            <th><span class="lang-en">Usual period</span><span class="lang-fr">Période habituelle</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>HRI</strong> – ACM/IEEE International Conference on Human-Robot Interaction</td><td>ACM / IEEE</td><td><span class="lang-en">March</span><span class="lang-fr">Mars</span></td></tr>
+                        <tr><td><strong>RO-MAN</strong> – Robot and Human Interactive Communication</td><td>IEEE</td><td><span class="lang-en">August–September</span><span class="lang-fr">Août–Septembre</span></td></tr>
+                        <tr><td><strong>ICDL</strong> – International Conference on Development and Learning</td><td>IEEE</td><td><span class="lang-en">Autumn</span><span class="lang-fr">Automne</span></td></tr>
+                        <tr><td><strong>ICSR</strong> – International Conference on Social Robotics</td><td>Springer</td><td><span class="lang-en">November</span><span class="lang-fr">Novembre</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cat-heading"><span class="cat-icon">🖥️</span> <span class="lang-en">Human-Computer Interaction</span><span class="lang-fr">Interaction Homme-Machine</span></div>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span class="lang-en">Conference</span><span class="lang-fr">Conférence</span></th>
+                            <th><span class="lang-en">Organiser</span><span class="lang-fr">Organisateur</span></th>
+                            <th><span class="lang-en">Usual period</span><span class="lang-fr">Période habituelle</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>CHI</strong> – ACM Conference on Human Factors in Computing Systems</td><td>ACM SIGCHI</td><td>April–May (CHI 2026: Yokohama)</td></tr>
+                        <tr><td><strong>IHM</strong> – Conférence francophone sur l'Interaction Homme-Machine</td><td>AFIHM</td><td><span class="lang-en">Autumn</span><span class="lang-fr">Automne</span></td></tr>
+                        <tr><td><strong>INTERACT</strong> – IFIP Conference on Human-Computer Interaction</td><td>IFIP TC13</td><td><span class="lang-en">August–September (biennial)</span><span class="lang-fr">Août–Septembre (biennal)</span></td></tr>
+                        <tr><td><strong>UIST</strong> – User Interface Software and Technology</td><td>ACM</td><td><span class="lang-en">October</span><span class="lang-fr">Octobre</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cat-heading"><span class="cat-icon">🧠</span> <span class="lang-en">Psychology, Geriatrics & Neurosciences</span><span class="lang-fr">Psychologie, Gériatrie & Neurosciences Cognitives</span></div>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span class="lang-en">Conference</span><span class="lang-fr">Conférence</span></th>
+                            <th><span class="lang-en">Organiser</span><span class="lang-fr">Organisateur</span></th>
+                            <th><span class="lang-en">Notes</span><span class="lang-fr">Notes</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>JASFGG</strong> – Journées Annuelles de la SFGG</td><td>SFGG</td><td>November — JASFGG 2026: 23–25 Nov., Paris CNIT</td></tr>
+                        <tr><td><strong>JNLF</strong> – Journées de Neurologie de Langue Française</td><td>JNLF</td><td><span class="lang-en">Spring</span><span class="lang-fr">Printemps</span></td></tr>
+                        <tr><td><strong>INS</strong> – International Neuropsychological Society</td><td>INS</td><td>February (INS 2026: Philadelphia)</td></tr>
+                        <tr><td><strong>EUGMS</strong> – European Geriatric Medicine Society Congress</td><td>EUGMS</td><td>September (2026: Lille)</td></tr>
+                        <tr><td><strong>AAIC</strong> – Alzheimer's Association International Conference</td><td>AAIC</td><td><span class="lang-en">July</span><span class="lang-fr">Juillet</span></td></tr>
+                        <tr><td><strong>Alzheimer Europe Conference</strong></td><td>Alzheimer Europe</td><td><span class="lang-en">Autumn</span><span class="lang-fr">Automne</span></td></tr>
+                        <tr><td><strong>SNLF</strong> – Société de Neuropsychologie de Langue Française</td><td>SNLF</td><td><span class="lang-en">Autumn</span><span class="lang-fr">Automne</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!-- IV. JOURNALS -->
+        <!-- ══════════════════════════════════════════ -->
+        <section id="journals">
+            <h2 class="section-title">
+                <span class="lang-en">IV. Journals & Reviews</span>
+                <span class="lang-fr">IV. Journaux & Revues</span>
+            </h2>
+
+            <div class="cat-heading"><span class="cat-icon">🤖</span> <span class="lang-en">Social Robotics & HRI</span><span class="lang-fr">Robotique Sociale & IHR</span></div>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr><th><span class="lang-en">Journal</span><span class="lang-fr">Revue</span></th><th><span class="lang-en">Publisher</span><span class="lang-fr">Éditeur</span></th><th><span class="lang-en">Notes</span><span class="lang-fr">Notes</span></th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>International Journal of Social Robotics (IJSR)</strong></td><td>Springer</td><td><span class="lang-en">Main journal</span><span class="lang-fr">Revue principale</span></td></tr>
+                        <tr><td><strong>J. Human-Robot Interaction (JHRI)</strong></td><td>ACM</td><td>Open access</td></tr>
+                        <tr><td><strong>ACM Transactions on Human-Robot Interaction</strong></td><td>ACM</td><td>—</td></tr>
+                        <tr><td><strong>IEEE Transactions on Human-Machine Systems</strong></td><td>IEEE</td><td>—</td></tr>
+                        <tr><td><strong>IEEE Robotics & Automation Magazine</strong></td><td>IEEE</td><td><span class="lang-en">Technology watch</span><span class="lang-fr">Veille technologique</span></td></tr>
+                        <tr><td><strong>Interaction Studies</strong></td><td>John Benjamins</td><td><span class="lang-en">Reference in cognitive sciences & interaction</span><span class="lang-fr">Référence en sciences cognitives & interaction</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cat-heading"><span class="cat-icon">🧠</span> <span class="lang-en">Psychology, Neuropsychology & Ageing</span><span class="lang-fr">Psychologie, Neuropsychologie & Vieillissement</span></div>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr><th><span class="lang-en">Journal</span><span class="lang-fr">Revue</span></th><th><span class="lang-en">Publisher</span><span class="lang-fr">Éditeur</span></th><th><span class="lang-en">Notes</span><span class="lang-fr">Notes</span></th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>NPG – Neurologie, Psychiatrie, Gériatrie</strong></td><td>Elsevier-Masson</td><td><span class="lang-en">French reference (brain ageing)</span><span class="lang-fr">Revue française de référence (vieillissement cérébral)</span></td></tr>
+                        <tr><td><strong>GPNV – Gériatrie & Psychologie Neuropsychiatrie du Vieillissement</strong></td><td>JLE</td><td><span class="lang-en">Indexed francophone journal (SFGG)</span><span class="lang-fr">Revue francophone indexée, publiée par la SFGG</span></td></tr>
+                        <tr><td><strong>Journal of Alzheimer's Disease (JAD)</strong></td><td>IOS Press</td><td><span class="lang-en">International AD reference</span><span class="lang-fr">Référence internationale MA</span></td></tr>
+                        <tr><td><strong>Alzheimer's & Dementia</strong></td><td>Wiley / Alzheimer's Assoc.</td><td>Flagship journal (AAIC)</td></tr>
+                        <tr><td><strong>Frontiers in Aging Neuroscience</strong></td><td>Frontiers</td><td>Open Access</td></tr>
+                        <tr><td><strong>BMC Geriatrics</strong></td><td>BioMed Central</td><td>Open Access</td></tr>
+                        <tr><td><strong>JAMDA</strong></td><td>Elsevier</td><td>Journal of the American Medical Directors Association</td></tr>
+                        <tr><td><strong>Gerontechnology</strong></td><td>ISG</td><td>—</td></tr>
+                        <tr><td><strong>Revue de Neuropsychologie</strong></td><td>JLE</td><td><span class="lang-en">French clinical neuropsychology</span><span class="lang-fr">Revue francophone de neuropsychologie clinique</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cat-heading"><span class="cat-icon">💻</span> <span class="lang-en">Online Resources & Non-Journal Publications</span><span class="lang-fr">Ressources en Ligne et Publications Hors Revue</span></div>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr><th><span class="lang-en">Journal</span><span class="lang-fr">Revue</span></th><th><span class="lang-en">Publisher</span><span class="lang-fr">Éditeur</span></th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>JMIR Human Factors</strong></td><td>JMIR Publications</td></tr>
+                        <tr><td><strong>JMIR Mental Health</strong></td><td>JMIR Publications</td></tr>
+                        <tr><td><strong>Journal of Medical Internet Research (JMIR)</strong></td><td>JMIR Publications</td></tr>
+                        <tr><td><strong>BMJ Open</strong></td><td>BMJ</td></tr>
+                        <tr><td><strong>International Journal of Human-Computer Interaction</strong></td><td>Taylor & Francis</td></tr>
+                        <tr><td><strong>Assistive Technology</strong></td><td>Taylor & Francis</td></tr>
+                        <tr><td><strong>Journal of Rehabilitation and Assistive Technologies Engineering</strong></td><td>SAGE</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!-- V. EUROPEAN PROJECTS -->
+        <!-- ══════════════════════════════════════════ -->
+        <section id="projects">
+            <h2 class="section-title">
+                <span class="lang-en">V. European Projects & Key Research Programmes</span>
+                <span class="lang-fr">V. Projets Européens & Programmes de Recherche Clés</span>
+            </h2>
+
+            <div class="project-card highlight">
+                <div class="project-header">
+                    <span class="project-name">Rob'Zheimer</span>
+                    <span class="project-period">2025–2028</span>
+                </div>
+                <p class="project-funding"><span class="lang-en">Funding:</span><span class="lang-fr">Financement :</span> CIFRE (INSEI / Les Diaconesses de Reuilly)</p>
+                <p class="project-desc"><span class="lang-en">Robot-Extension paradigm, nursing homes, AD/related disorders. PI: Quentin Gaie, supervised by Pr. Sophie Sakka & Pr. Hanna Chainay.</span><span class="lang-fr">Paradigme Robot-Extension, EHPAD, MA/MA. PI : Quentin Gaie, sous la direction de Pr. Sophie Sakka & Pr. Hanna Chainay.</span></p>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-name">SPRING</span>
+                    <span class="project-period">2020–2023</span>
+                </div>
+                <p class="project-funding"><span class="lang-en">Funding:</span><span class="lang-fr">Financement :</span> Horizon 2020, €8.3M — 8 partners (Inria, Broca/AP-HP, PAL Robotics…)</p>
+                <p class="project-desc"><span class="lang-en">Socially Pertinent Robots for Gerontological Healthcare. ARI robot (PAL Robotics) deployed at Hôpital Broca geriatric day hospital.</span><span class="lang-fr">Socially Pertinent Robots for Gerontological Healthcare. Robot ARI (PAL Robotics) déployé à l'hôpital Broca gériatrique de jour.</span></p>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-name">MARIO</span>
+                    <span class="project-period">2015–2018</span>
+                </div>
+                <p class="project-funding"><span class="lang-en">Funding:</span><span class="lang-fr">Financement :</span> EU, €4M</p>
+                <p class="project-desc"><span class="lang-en">Managing Active and healthy aging with caRing servIce rObots. Companion robot for dementia.</span><span class="lang-fr">Managing Active and healthy aging with caRing servIce rObots. Robot compagnon et démence.</span></p>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-name">MEMORA</span>
+                    <span class="project-period">2025–</span>
+                </div>
+                <p class="project-funding"><span class="lang-en">Funding:</span><span class="lang-fr">Financement :</span> Fondation Médéric Alzheimer (€50,000)</p>
+                <p class="project-desc"><span class="lang-en">Motor learning and memorisation, AD, LPNC Grenoble.</span><span class="lang-fr">Motricité et mémorisation, MA, LPNC Grenoble.</span></p>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-name">e-Vita</span>
+                    <span class="project-period">2020–2023</span>
+                </div>
+                <p class="project-funding"><span class="lang-en">Funding:</span><span class="lang-fr">Financement :</span> EU</p>
+                <p class="project-desc"><span class="lang-en">Virtual coach and robotics, ethical issues (Broca Living Lab).</span><span class="lang-fr">Coach virtuel et robotique, enjeux éthiques (Broca Living Lab).</span></p>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!-- VI. RESOURCES & FUNDERS -->
+        <!-- ══════════════════════════════════════════ -->
+        <section id="resources">
+            <h2 class="section-title">
+                <span class="lang-en">VI. Resources & Key Funders</span>
+                <span class="lang-fr">VI. Ressources & Financeurs Clés</span>
+            </h2>
+
+            <div class="cat-heading"><span class="cat-icon">💻</span> <span class="lang-en">Online Digital Resources</span><span class="lang-fr">Ressources Numériques</span></div>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span class="lang-en">Resource</span><span class="lang-fr">Ressource</span></th>
+                            <th>URL</th>
+                            <th><span class="lang-en">Use</span><span class="lang-fr">Utilité</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>IEEE Xplore</strong> — Social Robots in Alzheimer</td><td><a href="https://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText=Social%20Robots%20in%20Alzheimer" target="_blank" rel="noopener">ieeexplore.ieee.org ↗</a></td><td><span class="lang-en">Technical & SHS database</span><span class="lang-fr">Base de données techniques & SHS</span></td></tr>
+                        <tr><td><strong>GDR Robotique</strong></td><td><a href="https://www.gdr-robotique.org/" target="_blank" rel="noopener">gdr-robotique.org ↗</a></td><td><span class="lang-en">French robotics research group (CNRS)</span><span class="lang-fr">Groupement De Recherche robotique français (CNRS)</span></td></tr>
+                        <tr><td><strong>AFIHM</strong></td><td><a href="https://afihm.org" target="_blank" rel="noopener">afihm.org ↗</a></td><td><span class="lang-en">Reference for French HCI conferences</span><span class="lang-fr">Référence pour conférences francophones IHM</span></td></tr>
+                        <tr><td><strong>PubMed / NCBI</strong></td><td><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">ncbi.nlm.nih.gov ↗</a></td><td><span class="lang-en">International medical bibliography</span><span class="lang-fr">Bibliographie médicale internationale</span></td></tr>
+                        <tr><td><strong>HAL Science</strong></td><td><a href="https://hal.science" target="_blank" rel="noopener">hal.science ↗</a></td><td><span class="lang-en">French national open archive</span><span class="lang-fr">Archive ouverte nationale française</span></td></tr>
+                        <tr><td><strong>ScanR</strong></td><td><a href="https://scanr.enseignementsup-recherche.gouv.fr" target="_blank" rel="noopener">scanr.enseignementsup-recherche.gouv.fr ↗</a></td><td><span class="lang-en">Directory of French public research structures</span><span class="lang-fr">Répertoire des structures de recherche publiques FR</span></td></tr>
+                        <tr><td><strong>WikiCFP</strong></td><td><a href="http://wikicfp.com" target="_blank" rel="noopener">wikicfp.com ↗</a></td><td><span class="lang-en">Centralises calls for papers</span><span class="lang-fr">Centralise les appels à communications</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cat-heading"><span class="cat-icon">🏛️</span> <span class="lang-en">Key Institutions & Funders</span><span class="lang-fr">Institutions & Financeurs Clés</span></div>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span class="lang-en">Institution</span><span class="lang-fr">Institution</span></th>
+                            <th><span class="lang-en">Mission</span><span class="lang-fr">Mission</span></th>
+                            <th><span class="lang-en">Link</span><span class="lang-fr">Lien</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Fondation Médéric Alzheimer</strong></td>
+                            <td><span class="lang-en">Annual NPI project calls (up to €50,000); NPI guide 2024</span><span class="lang-fr">Appels à projets INM annuels (jusqu'à 50 000€) ; guide INM 2024</span></td>
+                            <td><a href="https://www.fondation-mederic-alzheimer.org" target="_blank" rel="noopener">fondation-mederic-alzheimer.org ↗</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>France Alzheimer</strong></td>
+                            <td><span class="lang-en">Research support, funded projects</span><span class="lang-fr">Soutien à la recherche, projets financés</span></td>
+                            <td><a href="https://francealzheimer.org" target="_blank" rel="noopener">francealzheimer.org ↗</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fondation Alzheimer</strong></td>
+                            <td><span class="lang-en">1st non-governmental French research funder (€57.25M / 175 projects since 2012)</span><span class="lang-fr">1er financeur non-gouvernemental de la recherche FR (57,25M€ / 175 projets depuis 2012)</span></td>
+                            <td><a href="https://fondation-alzheimer.org" target="_blank" rel="noopener">fondation-alzheimer.org ↗</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ILVV</strong></td>
+                            <td><span class="lang-en">Institute of Longevity, Ageing</span><span class="lang-fr">Institut de la Longévité, Vieillesses et Vieillissement</span></td>
+                            <td><a href="https://www.ilvv.fr" target="_blank" rel="noopener">ilvv.fr ↗</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SFGG</strong></td>
+                            <td><span class="lang-en">French Society of Geriatrics and Gerontology</span><span class="lang-fr">Société Française de Gériatrie et Gérontologie</span></td>
+                            <td><a href="https://sfgg.org" target="_blank" rel="noopener">sfgg.org ↗</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ANR</strong></td>
+                            <td><span class="lang-en">National Research Agency — main public research funder</span><span class="lang-fr">Agence Nationale de la Recherche — financeur principal de la recherche publique</span></td>
+                            <td><a href="https://anr.fr" target="_blank" rel="noopener">anr.fr ↗</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ── Back links ── -->
+        <div style="margin: 60px 0 20px; display: flex; gap: 24px; flex-wrap: wrap;">
+            <a href="/" style="color: var(--gray); text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-arrow-left"></i>
+                <span class="lang-en">Back to CV</span>
+                <span class="lang-fr">Retour au CV</span>
+            </a>
+            <a href="/robzheimer" style="color: var(--gray); text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">
+                <span class="lang-en">Rob'Zheimer Project</span>
+                <span class="lang-fr">Projet Rob'Zheimer</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 QUENTIN GAIE — <a href="/" style="color: var(--gray); text-decoration: none;">quentin.gaie.fr</a>
+            <span class="update-tag"><span class="lang-en">Updated</span><span class="lang-fr">Mis à jour</span> Mai 2026</span>
+        </p>
+    </footer>
+
+    <a href="#top" class="back-to-top" title="Back to top" aria-label="Retour en haut">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script async defer data-domain="quentin.gaie.fr" src="https://plausible.io/js/script.js"></script>
+    <script>
+        const body = document.body;
+        const themeIcon = document.getElementById('theme-icon');
+        const langText = document.getElementById('lang-text');
+
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            themeIcon.className = body.classList.contains('light-mode') ? 'fas fa-moon' : 'fas fa-sun';
+        });
+
+        document.getElementById('lang-toggle').addEventListener('click', () => {
+            body.style.opacity = '0';
+            setTimeout(() => {
+                body.classList.toggle('fr-mode');
+                langText.textContent = body.classList.contains('fr-mode') ? 'FR' : 'EN';
+                body.style.opacity = '1';
+            }, 150);
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (navigator.language.startsWith('fr')) {
+                body.classList.add('fr-mode');
+                langText.textContent = 'FR';
+            }
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                body.classList.remove('light-mode');
+                themeIcon.className = 'fas fa-sun';
+            }
+        });
+    </script>
+</body>
+</html>
