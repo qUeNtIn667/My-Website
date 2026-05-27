@@ -20,6 +20,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
 
     <style>
+    /* Ajustements de mise en page spécifiques à la cartographie */
+    .page-hero { margin-bottom: 30px; }
+    .page-hero .subtitle { max-width: 680px; }
+
+    /* Structure serrée pour les grands tableaux de données */
+    .table-scroll { overflow-x: auto; margin: 12px 0 30px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    th {
+        text-align: left;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--gray);
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+    }
+    td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+    tr:last-child td { border-bottom: none; }
+    td a { color: var(--text); text-decoration: none; font-size: 0.8rem; }
+    td a:hover { text-decoration: underline; }
+
+    /* Barre de filtres de la cartographie */
     .filter-bar {
         display: flex;
         flex-wrap: wrap;
@@ -41,7 +64,8 @@
         color: var(--bg);
         border-color: var(--text);
     }
-
+    
+    /* Grille et cartes des laboratoires / chercheurs */
     .card-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -97,6 +121,7 @@
         line-height: 1.3;
     }
 
+    /* Fiches des projets */
     .project-card {
         padding: 20px 24px;
         background: var(--card-bg);
@@ -116,15 +141,7 @@
     .project-period { font-size: 0.82rem; color: var(--gray); }
     .project-funding { font-size: 0.82rem; color: var(--gray); margin-bottom: 8px; }
     .project-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.5; }
-
-    .disclaimer {
-        font-size: 0.8rem;
-        color: var(--gray);
-        border-top: 1px solid var(--border);
-        padding-top: 16px;
-        margin-top: 40px;
-    }
-</style>
+    </style>
 </head>
 
 <body class="light-mode">
