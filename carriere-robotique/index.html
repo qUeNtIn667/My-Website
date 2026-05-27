@@ -838,13 +838,16 @@
         });
 
         document.getElementById('lang-toggle').addEventListener('click', () => {
-            body.style.opacity = '0';
-            setTimeout(() => {
-                body.classList.toggle('fr-mode');
-                langText.textContent = body.classList.contains('fr-mode') ? 'FR' : 'EN';
-                body.style.opacity = '1';
-            }, 150);
-        });
+    body.style.opacity = '0';
+    
+    setTimeout(() => {
+        body.classList.toggle('fr-mode');
+        const isFrench = body.classList.contains('fr-mode');
+        document.documentElement.lang = isFrench ? 'fr' : 'en';
+        langText.textContent = isFrench ? 'FR' : 'EN';
+        body.style.opacity = '1';
+        }, 150);
+    });
 
         window.addEventListener('DOMContentLoaded', () => {
             if (navigator.language.startsWith('fr')) {
