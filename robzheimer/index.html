@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
 
     <style>
+    /* Ajustements de la table des matières spécifiques à Rob'Zheimer */
+    .toc { max-width: 500px; }
+
+    /* Cartes des hypothèses de recherche */
     .hypothesis-grid {
         display: flex;
         flex-direction: column;
@@ -51,15 +55,14 @@
         line-height: 1.6;
     }
 
+    /* Grille de comparaison des paradigmes */
     .paradigm-compare {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 16px;
         margin: 20px 0;
     }
-    @media (max-width: 600px) { 
-        .paradigm-compare { grid-template-columns: 1fr; } 
-    }
+    @media (max-width: 600px) { .paradigm-compare { grid-template-columns: 1fr; } }
     .paradigm-card {
         padding: 20px;
         background: var(--card-bg);
@@ -85,6 +88,22 @@
     .paradigm-card.new { border-color: var(--text); }
     .paradigm-card.new .p-label { color: var(--text); }
 
+    /* Tableau de l'étude clinique (police légèrement plus petite) */
+    .table-scroll { overflow-x: auto; margin: 20px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    th {
+        text-align: left;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--gray);
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+    }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+    tr:last-child td { border-bottom: none; }
+        
     .badge {
         display: inline-block;
         padding: 2px 8px;
