@@ -240,63 +240,31 @@
                 <span class="row-date">2023</span>
             </div>
         </section>
-        
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splide/splide@4.1.4/dist/splide.min.css">
 
-<section class="section-container">
-    <h2 class="section-title">
-        <span class="lang-en">Fundings & Partners</span>
-        <span class="lang-fr">Financements & Partenaires</span>
-    </h2>
-    <div class="partners-logos">
-        <div class="splide" id="partner-carousel">
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <li class="splide__slide"><img src="Logo_CYU.png" alt="Partenaire 1"></li>
-                    <li class="splide__slide"><img src="Logo_INSEI.png" alt="Partenaire 2"></li>
-                    <li class="splide__slide"><img src="Logo_Lyon2.png" alt="Partenaire 3"></li>
-                    <li class="splide__slide"><img src="Logo_LesDiaconessesDeReuilly.png" alt="Partenaire 4"></li>
-                    <li class="splide__slide"><img src="Logo_CSD92.png" alt="Partenaire 5"></li>
-                    <li class="splide__slide"><img src="Logo_ANRT.png" alt="Partenaire 6"></li>
-                    <li class="splide__slide"><img src="Logo_IDF.png" alt="Partenaire 7"></li>
-                    <li class="splide__slide"><img src="Logo_ChaireAÉN.png" alt="Partenaire 8"></li>
-                    <li class="splide__slide"><img src="Logo_CNV.png" alt="Partenaire 9"></li>
-                </ul>
+        <section class="section-container">
+            <h2 class="section-title">
+                <span class="lang-en">Fundings & Partners</span>
+                <span class="lang-fr">Financements & Partenaires</span>
+            </h2>
+            <div class="partners-logos">
+                <div class="splide" id="partner-carousel">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            <li class="splide__slide"><img src="Logo_CYU.png" alt="Partenaire 1"></li>
+                            <li class="splide__slide"><img src="Logo_INSEI.png" alt="Partenaire 2"></li>
+                            <li class="splide__slide"><img src="Logo_Lyon2.png" alt="Partenaire 3"></li>
+                            <li class="splide__slide"><img src="Logo_LesDiaconessesDeReuilly.png" alt="Partenaire 4"></li>
+                            <li class="splide__slide"><img src="Logo_CSD92.png" alt="Partenaire 5"></li>
+                            <li class="splide__slide"><img src="Logo_ANRT.png" alt="Partenaire 6"></li>
+                            <li class="splide__slide"><img src="Logo_IDF.png" alt="Partenaire 7"></li>
+                            <li class="splide__slide"><img src="Logo_ChaireAÉN.png" alt="Partenaire 8"></li>
+                            <li class="splide__slide"><img src="Logo_CNV.png" alt="Partenaire 9"></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Chargement des scripts JS locaux -->
-<script src="splide.min.js"></script>
-<script src="splide-auto-scroll.min.js"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var splide = new Splide('#partner-carousel', {
-            type       : 'loop',
-            drag       : 'free',
-            focus      : 'center',
-            perPage    : 4,
-            gap        : '40px',
-            arrows     : false,
-            pagination : false,
-            autoScroll : {
-                speed        : 1,
-                pauseOnHover : true,
-                pauseOnFocus : false,
-            },
-            breakpoints: {
-                640: {
-                    perPage: 2,
-                    gap: '20px',
-                }
-            }
-        });
-
-        splide.mount( window.splide.Extensions );
-    });
-    </script>        
+        </section>
+    
         <section class="section-container" id="publications">
             <h2 class="section-title">
                 <span class="lang-en">Last Publications</span>
@@ -638,5 +606,40 @@
             }
         });
     </script>
+
+    <script src="splide.min.js"></script>
+    <script src="splide-auto-scroll.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var splide = new Splide('#partner-carousel', {
+                type       : 'loop',
+                drag       : 'free',
+                focus      : 'center',
+                perPage    : 4,
+                gap        : '40px',
+                arrows     : false,
+                pagination : false,
+                autoScroll : {
+                    speed        : 1,
+                    pauseOnHover : true,
+                    pauseOnFocus : false,
+                },
+                breakpoints: {
+                    640: {
+                        perPage: 2,
+                        gap: '20px',
+                    }
+                }
+            });
+            
+            if (window.splide && window.splide.Extensions) {
+                splide.mount( window.splide.Extensions );
+            } else {
+                splide.mount();
+            }
+        });
+    </script>
+    
 </body>
 </html>
