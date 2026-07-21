@@ -242,8 +242,49 @@
         <section class="section-container">
             <h2 class="section-title"><span class="lang-en">Fundings & Partners</span><span class="lang-fr">Financements & Partenaires</span></h2>
             <div class="partners-logos">
-                <img src="Bannière.png" alt="Partners" class="partner-logo" loading="lazy">
+            <div class="splide" id="partner-carousel">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide"><img src="logo-CYU.png" alt="Partenaire 1"></li>
+                        <li class="splide__slide"><img src="logo_INSEI.png" alt="Partenaire 2"></li>
+                        <li class="splide__slide"><img src="logo-Lyon2.png" alt="Partenaire 3"></li>
+                        <li class="splide__slide"><img src="logo_LesDiaconessesDeReuilly.png" alt="Partenaire 4"></li>
+                        <li class="splide__slide"><img src="logo_CSD92.png" alt="Partenaire 5"></li>
+                        <li class="splide__slide"><img src="logo_IDF.png" alt="Partenaire 6"></li>
+                        <li class="splide__slide"><img src="logo_ChaireAÉN.png" alt="Partenaire 7"></li>
+                        <li class="splide__slide"><img src="logo_CNV.png" alt="Partenaire 8"></li>
+                    </ul>
+                </div>
             </div>
+            </div>
+        </section>
+
+        <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                new Splide('#partner-carousel', {
+                    type   : 'loop',       // Boucle infinie
+                    drag   : 'free',       // Permet de glisser librement au doigt/souris
+                    focus  : 'center',     // Centre les logos
+                    perPage: 4,            // Nombre de logos visibles en même temps
+                    gap    : '40px',       // Espace entre les logos
+                    arrows : false,        // Masque les flèches de navigation
+                    pagination: false,     // Masque les petits points du bas
+                    autoScroll: {
+                        speed: 1,          // Vitesse du défilement (plus le chiffre est grand, plus ça va vite)
+                        pauseOnHover: true,// Met en pause si la souris passe dessus
+                    },
+                    // Rendre le carrousel adaptatif sur mobile
+                    breakpoints: {
+                        640: {
+                            perPage: 2,    // Seulement 2 logos visibles sur mobile
+                            gap: '20px',
+                        }
+                    }
+                }).mount( window.splide.Extensions );
+            });
+        </script>
         </section>
 
         <section class="section-container" id="publications">
