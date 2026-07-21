@@ -648,32 +648,42 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var splide = new Splide('#partner-carousel', {
-                type       : 'loop',
-                drag       : 'free',
-                focus      : 'center',
-                perPage    : 4,
-                gap        : '40px',
-                arrows     : false,
-                pagination : false,
-                autoScroll : {
-                    speed        : 1,
-                    pauseOnHover : true,
-                    pauseOnFocus : false,
-                },
-                breakpoints: {
-                    640: {
-                        perPage: 2,
-                        gap: '20px',
+            try {
+                if (typeof Splide === 'undefined') return;
+        
+                var splide = new Splide('#partner-carousel', {
+                    type       : 'loop',
+                    drag       : 'free',
+                    focus      : 'center',
+                    autoWidth  : true,
+                    gap        : '50px',
+                    arrows     : false,
+                    pagination : false,
+                    autoScroll : {
+                        speed        : 1,
+                        pauseOnHover : true,
+                        pauseOnFocus : false,
+                    },
+                    breakpoints: {
+                        640: { gap: '30px' }
                     }
+                });
+                
+                var autoScrollExt = null;
+                if (window.splide && window.splide.Extensions && window.splide.Extensions.AutoScroll) {
+                    autoScrollExt = window.splide.Extensions.AutoScroll;
+                } else if (window.SplideAutoScroll && window.SplideAutoScroll.AutoScroll) {
+                    autoScrollExt = window.SplideAutoScroll.AutoScroll;
                 }
-            });
-            
-            var extensions = window.splide && window.splide.Extensions 
-                ? window.splide.Extensions 
-                : (window.SplideAutoScroll ? { AutoScroll: window.SplideAutoScroll.AutoScroll } : {});
-    
-            splide.mount( extensions );
+        
+                if (autoScrollExt) {
+                    splide.mount({ AutoScroll: autoScrollExt });
+                } else {
+                    splide.mount();
+                }
+            } catch (e) {
+                console.error("Erreur d'initialisation Splide :", e);
+            }
         });
     </script>
         
