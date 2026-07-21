@@ -57,6 +57,23 @@ body.fr-mode .lang-fr { display: inline; }
     line-height: 1.2;
 }
 
+i.fas, i.fab, i.far, i.fa {
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+    display: inline-block !important;
+    font-style: normal !important;
+    font-variant: normal !important;
+    text-rendering: auto !important;
+    line-height: 1 !important;
+}
+
+i.fas {
+    font-weight: 900 !important;
+}
+
+i.fab {
+    font-weight: 400 !important;
+}
+
 .poster-link:hover { text-decoration: underline; }
 
 .theme-switch, .menu-macaron, .lang-switch {
