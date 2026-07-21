@@ -177,43 +177,43 @@ body.light-mode .link-card { background: #f2f2f2; color: #1a1a1a; }
     height: 100px;
 }
 
-#partner-carousel .splide__slide a {
-    display: inline-flex;
+#partner-carousel .splide__slide {
+    display: flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
-    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    height: 90px;
+    padding: 0 10px;
 }
 
-#partner-carousel .splide__slide a:hover {
-    opacity: 0.8;
-    transform: scale(1.05);
+#partner-carousel .splide__slide a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 #partner-carousel .splide__slide img {
-    max-width: 100%;
-    max-height: 80px;
+    max-height: 70px;
     width: auto;
-    height: auto;
     object-fit: contain;
-    transition: filter 0.3s ease;
+    transition: transform 0.2s ease, filter 0.2s ease;
 }
-@media (prefers-color-scheme: dark) {
-    #partner-carousel .splide__slide img {
-        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.95)) 
-                drop-shadow(0 0 2px rgba(255, 255, 255, 1)) !important;
-    }
+
+#partner-carousel .splide__slide a:hover img {
+    transform: scale(1.05);
 }
+
 @media (prefers-color-scheme: light) {
     #partner-carousel .splide__slide img {
-        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.25)) !important;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2)) !important;
     }
 }
 
-#partner-carousel .splide__slide img[src*="Logo_IDF"] {
-    transform: scale(5.0);
+@media (prefers-color-scheme: dark) {
+    #partner-carousel .splide__slide img {
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.75)) !important;
+    }
 }
-
 .interests-tags { display: flex; flex-wrap: wrap; gap: 10px; }
 .tag { padding: 8px 16px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; font-size: 0.9rem; color: var(--gray); }
 .back-to-top {
