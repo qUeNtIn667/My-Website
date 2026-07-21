@@ -240,13 +240,19 @@
                 <span class="row-date">2023</span>
             </div>
         </section>
+        
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
 
 <section class="section-container">
-    <h2 class="section-title"><span class="lang-en">Fundings & Partners</span><span class="lang-fr">Financements & Partenaires</span></h2>
+    <h2 class="section-title">
+        <span class="lang-en">Fundings & Partners</span>
+        <span class="lang-fr">Financements & Partenaires</span>
+    </h2>
     <div class="partners-logos">
         <div class="splide" id="partner-carousel">
             <div class="splide__track">
                 <ul class="splide__list">
+                    <!-- Note : Si vos images ne s'affichent pas, retirez "MyWebsite/" des src -->
                     <li class="splide__slide"><img src="MyWebsite/Logo_CYU.png" alt="Partenaire 1"></li>
                     <li class="splide__slide"><img src="MyWebsite/Logo_INSEI.png" alt="Partenaire 2"></li>
                     <li class="splide__slide"><img src="MyWebsite/Logo_Lyon2.png" alt="Partenaire 3"></li>
@@ -262,33 +268,35 @@
     </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        new Splide('#partner-carousel', {
-            type       : 'loop',
-            drag       : 'free',
-            focus      : 'center',
-            perPage    : 4,
-            gap        : '40px',
-            arrows     : false,
-            pagination : false,
-            autoScroll : {
-                speed        : 1,
-                pauseOnHover : true,
-                pauseOnFocus : false,
-            },
-            breakpoints: {
-                640: {
-                    perPage: 2,
-                    gap: '20px',
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var splide = new Splide('#partner-carousel', {
+                type       : 'loop',
+                drag       : 'free',
+                focus      : 'center',
+                perPage    : 4,
+                gap        : '40px',
+                arrows     : false,
+                pagination : false,
+                autoScroll : {
+                    speed        : 1,
+                    pauseOnHover : true,
+                    pauseOnFocus : false,
+                },
+                breakpoints: {
+                    640: {
+                        perPage: 2,
+                        gap: '20px',
+                    }
                 }
-            }
-        }).mount(window.splide.Extensions);
-    });
-</script>
+            });
+    
+            splide.mount( window.splide.Extensions.AutoScroll || window.splide.Extensions );
+        });
+    </script>
         
         <section class="section-container" id="publications">
             <h2 class="section-title">
