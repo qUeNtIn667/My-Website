@@ -182,7 +182,6 @@ body.light-mode .link-card { background: #f2f2f2; color: #1a1a1a; }
     align-items: center;
     justify-content: center;
     height: 90px;
-    padding: 0 10px;
 }
 
 #partner-carousel .splide__slide a {
@@ -201,6 +200,10 @@ body.light-mode .link-card { background: #f2f2f2; color: #1a1a1a; }
 
 #partner-carousel .splide__slide a:hover img {
     transform: scale(1.05);
+}
+
+#partner-carousel .splide__slide img[src*="Logo_IDF"] {
+    transform: scale(2.0);
 }
 
 @media (prefers-color-scheme: light) {
