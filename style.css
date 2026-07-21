@@ -206,10 +206,12 @@ body.light-mode .link-card { background: #f2f2f2; color: #1a1a1a; }
 }
 @media (prefers-color-scheme: light) {
     #partner-carousel .splide__slide img {
-        filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.8)) !important;
+        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.25)) !important;
     }
 }
-    }
+
+#partner-carousel .splide__slide img[src*="Logo_IDF"] {
+    transform: scale(2);
 }
 
 .interests-tags { display: flex; flex-wrap: wrap; gap: 10px; }
