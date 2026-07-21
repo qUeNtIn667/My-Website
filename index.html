@@ -75,9 +75,9 @@
 <body class="light-mode">
     <div id="top"></div>
 
-    <div class="menu-macaron">
+     <div class="menu-macaron">
         <button class="macaron-icon" title="Navigation Menu" aria-label="Menu">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <i class="fas fa-bars"></i>
         </button>
         <nav class="macaron-nav">
             <a href="#about"><span class="lang-en">About Me</span><span class="lang-fr">À propos</span></a>
@@ -93,12 +93,13 @@
             <a href="/carriere-robotique" style="color: var(--accent);">→ <span class="lang-en">Work in HRI</span><span class="lang-fr">Travailler en IHR</span></a>
         </nav>
     </div>
-
+    
     <div class="theme-switch" id="theme-toggle">
         <button class="macaron-icon" title="Toggle Mode" aria-label="Theme Toggle">
-            <svg id="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <i class="fas fa-moon" id="theme-icon"></i>
         </button>
     </div>
+    
     <div class="lang-switch" id="lang-toggle">
         <button class="macaron-icon" aria-label="Language Toggle">
             <span id="lang-text" class="lang-text-small">EN</span>
@@ -549,10 +550,10 @@
     
     <footer><p>© 2026 QUENTIN GAIE</p></footer>
 
-   <a href="#top" class="back-to-top" title="Back to top" aria-label="Retour en haut">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+    <a href="#top" class="back-to-top" title="Back to top" aria-label="Retour en haut">
+        <i class="fas fa-arrow-up"></i>
     </a>
-
+    
     <script>
         const body = document.body;
         const themeIcon = document.getElementById('theme-icon');
