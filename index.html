@@ -632,14 +632,14 @@
                     }
                 }
             });
+            
+            var extensions = window.splide && window.splide.Extensions 
+                ? window.splide.Extensions 
+                : (window.SplideAutoScroll ? { AutoScroll: window.SplideAutoScroll.AutoScroll } : {});
     
-            if (window.splide && window.splide.Extensions) {
-                splide.mount( window.splide.Extensions );
-            } else {
-                splide.mount();
-            }
+            splide.mount( extensions );
         });
     </script>
-    
+        
 </body>
 </html>
