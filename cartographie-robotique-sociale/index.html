@@ -267,6 +267,7 @@
                 <span class="lang-fr">🗺️ Cartographie de la Robotique Sociale Gérontologique en France</span>
             </p>
         </div>
+        
         <div class="map-wrapper" style="max-width: 700px; margin: 2rem auto;">
           <style>
             .map-wrapper svg {
@@ -287,9 +288,7 @@
               cursor: pointer;
               transition: r 0.2s ease;
             }
-            .map-wrapper .hub:hover circle {
-              r: 18;
-            }
+            .map-wrapper .hub:hover circle { r: 16; }
             .map-wrapper .city circle {
               fill: #2b6cb0;
               stroke: #fff;
@@ -297,12 +296,10 @@
               cursor: pointer;
               transition: r 0.2s ease;
             }
-            .map-wrapper .city:hover circle {
-              r: 9;
-            }
+            .map-wrapper .city:hover circle { r: 8; }
             .map-wrapper text {
               font-family: system-ui, -apple-system, sans-serif;
-              font-size: 12px;
+              font-size: 11px;
               fill: #1a202c;
               font-weight: 600;
               pointer-events: none;
@@ -336,90 +333,115 @@
             }
           </style>
         
-          <svg viewBox="0 0 600 550" xmlns="http://www.w3.org/2000/svg">
-            <!-- France métropolitaine (simplifiée) -->
-            <path class="france-shape" d="M 140,55 L 180,45 L 240,38 L 300,35 L 360,42 L 410,58 L 450,85 L 475,120 L 485,155 L 480,190 L 465,225 L 445,260 L 425,295 L 405,330 L 385,365 L 360,400 L 335,435 L 310,465 L 285,485 L 260,495 L 235,485 L 210,455 L 185,415 L 160,375 L 135,335 L 115,295 L 95,255 L 82,215 L 75,175 L 78,135 L 88,100 L 105,75 Z" />
-                
-                <!-- HUB Île-de-France -->
-                <g class="hub" data-region="idf" role="button" tabindex="0">
-                  <circle cx="295" cy="135" r="14" />
-                  <text x="295" y="110" text-anchor="middle">Paris</text>
-                </g>
-                
-                <!-- HUB Auvergne-Rhône-Alpes -->
-                <g class="hub" data-region="ara" role="button" tabindex="0">
-                  <circle cx="370" cy="275" r="12" />
-                  <text x="370" y="300" text-anchor="middle">Grenoble / Lyon</text>
-                </g>
-                
-                <!-- Villes -->
-                <g class="city" data-region="nantes" role="button" tabindex="0">
-                  <circle cx="165" cy="175" r="6" />
-                  <text x="165" y="165" text-anchor="middle">Nantes</text>
-                </g>
-                <g class="city" data-region="bordeaux" role="button" tabindex="0">
-                  <circle cx="145" cy="315" r="6" />
-                  <text x="145" y="340" text-anchor="middle">Bordeaux</text>
-                </g>
-                <g class="city" data-region="nice" role="button" tabindex="0">
-                  <circle cx="430" cy="375" r="6" />
-                  <text x="430" y="400" text-anchor="middle">Nice</text>
-                </g>
-                <g class="city" data-region="nancy" role="button" tabindex="0">
-                  <circle cx="425" cy="105" r="6" />
-                  <text x="425" y="90" text-anchor="middle">Nancy</text>
-                </g>
-              </svg>
-            
-              <div id="map-info" class="map-info-panel">
-                <h4 id="map-title"></h4>
-                <ul id="map-list"></ul>
-              </div>
-            
-              <script>
-                (function() {
-                  const labs = {
-                    idf: {
-                      title: "HUB Île-de-France",
-                      list: ["Grhapes / INSEI — CY Cergy Paris", "ISIR — Sorbonne Université", "ETIS — CY Cergy Paris", "LISN — Paris-Saclay", "CHArt — Paris 8", "Broca Living Lab — AP-HP"]
-                    },
-                    ara: {
-                      title: "HUB Auvergne-Rhône-Alpes",
-                      list: ["LIG — Grenoble", "Inria Grenoble", "EMC — Lyon 2", "LAPSCO — Clermont-Auvergne"]
-                    },
-                    nantes: { title: "Nantes", list: ["LS2N — Centrale Nantes", "CHU Nantes"] },
-                    bordeaux: { title: "Bordeaux", list: ["Inria Bordeaux"] },
-                    nice: { title: "Nice", list: ["Inria Nice", "CHU Nice"] },
-                    nancy: { title: "Nancy", list: ["Université de Lorraine — 2LPN"] }
-                  };
-            
-                  const wrapper = document.currentScript.closest('.map-wrapper');
-                  const panel = wrapper.querySelector('#map-info');
-                  const titleEl = wrapper.querySelector('#map-title');
-                  const listEl = wrapper.querySelector('#map-list');
-            
-                  function openRegion(region) {
-                    const data = labs[region];
-                    if (!data) return;
-                    titleEl.textContent = data.title;
-                    listEl.innerHTML = data.list.map(l => '<li>' + l + '</li>').join('');
-                    panel.classList.add('active');
+          <svg viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg">
+            <!-- Contour France métropolitaine (reconnaissable) -->
+            <path class="france-shape" d="
+              M 285,38
+              L 325,42  360,55  395,65  420,80  445,105  465,135
+              L 480,165  490,195  495,225  500,255  505,285  510,315
+              L 515,345  510,375  495,400  470,415  440,425
+              L 400,430  360,435  320,438  280,435  240,430
+              L 200,420  165,405  135,385  110,360  90,330
+              L 75,295   65,260   58,225   55,190   58,155
+              L 65,125   80,100   105,85   135,75   170,70
+              L 210,65   245,55   270,45   285,38
+              Z
+            " />
+        
+            <!-- HUB Île-de-France -->
+            <g class="hub" data-region="idf" role="button" tabindex="0">
+              <circle cx="305" cy="145" r="13" />
+              <text x="305" y="125" text-anchor="middle">Paris</text>
+            </g>
+        
+            <!-- HUB Auvergne-Rhône-Alpes -->
+            <g class="hub" data-region="ara" role="button" tabindex="0">
+              <circle cx="385" cy="255" r="11" />
+              <text x="385" y="280" text-anchor="middle">Grenoble / Lyon</text>
+            </g>
+        
+            <!-- Villes -->
+            <g class="city" data-region="nantes" role="button" tabindex="0">
+              <circle cx="115" cy="205" r="5.5" />
+              <text x="115" y="195" text-anchor="middle">Nantes</text>
+            </g>
+            <g class="city" data-region="bordeaux" role="button" tabindex="0">
+              <circle cx="135" cy="320" r="5.5" />
+              <text x="135" y="345" text-anchor="middle">Bordeaux</text>
+            </g>
+            <g class="city" data-region="nice" role="button" tabindex="0">
+              <circle cx="485" cy="365" r="5.5" />
+              <text x="485" y="390" text-anchor="middle">Nice</text>
+            </g>
+            <g class="city" data-region="nancy" role="button" tabindex="0">
+              <circle cx="415" cy="115" r="5.5" />
+              <text x="415" y="100" text-anchor="middle">Nancy</text>
+            </g>
+            <g class="city" data-region="nimes" role="button" tabindex="0">
+              <circle cx="365" cy="345" r="5" />
+              <text x="365" y="365" text-anchor="middle">Nîmes</text>
+            </g>
+            <g class="city" data-region="limoges" role="button" tabindex="0">
+              <circle cx="235" cy="245" r="5" />
+              <text x="235" y="235" text-anchor="middle">Limoges</text>
+            </g>
+            <g class="city" data-region="clermont" role="button" tabindex="0">
+              <circle cx="315" cy="255" r="5" />
+              <text x="315" y="275" text-anchor="middle">Clermont</text>
+            </g>
+          </svg>
+        
+          <div id="map-info" class="map-info-panel">
+            <h4 id="map-title"></h4>
+            <ul id="map-list"></ul>
+          </div>
+        
+          <script>
+            (function() {
+              const labs = {
+                idf: {
+                  title: "HUB Île-de-France",
+                  list: ["Grhapes / INSEI — CY Cergy Paris", "ISIR — Sorbonne Université", "ETIS — CY Cergy Paris", "LISN — Paris-Saclay", "CHArt — Paris 8", "Broca Living Lab — AP-HP"]
+                },
+                ara: {
+                  title: "HUB Auvergne-Rhône-Alpes",
+                  list: ["LIG — Grenoble", "Inria Grenoble", "EMC — Lyon 2", "LAPSCO — Clermont-Auvergne"]
+                },
+                nantes: { title: "Nantes", list: ["LS2N — Centrale Nantes", "CHU Nantes"] },
+                bordeaux: { title: "Bordeaux", list: ["Inria Bordeaux"] },
+                nice: { title: "Nice", list: ["Inria Nice", "CHU Nice"] },
+                nancy: { title: "Nancy", list: ["Université de Lorraine — 2LPN"] },
+                nimes: { title: "Nîmes", list: ["DIS — Université de Nîmes"] },
+                limoges: { title: "Limoges", list: ["Université de Limoges"] },
+                clermont: { title: "Clermont-Ferrand", list: ["LAPSCO — Université Clermont-Auvergne"] }
+              };
+        
+              const wrapper = document.currentScript.closest('.map-wrapper');
+              const panel = wrapper.querySelector('#map-info');
+              const titleEl = wrapper.querySelector('#map-title');
+              const listEl = wrapper.querySelector('#map-list');
+        
+              function openRegion(region) {
+                const data = labs[region];
+                if (!data) return;
+                titleEl.textContent = data.title;
+                listEl.innerHTML = data.list.map(l => '<li>' + l + '</li>').join('');
+                panel.classList.add('active');
+              }
+        
+              wrapper.querySelectorAll('.hub, .city').forEach(node => {
+                const activate = () => openRegion(node.dataset.region);
+                node.addEventListener('click', activate);
+                node.addEventListener('keydown', e => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    activate();
                   }
-            
-                  wrapper.querySelectorAll('.hub, .city').forEach(node => {
-                    const activate = () => openRegion(node.dataset.region);
-            
-                    node.addEventListener('click', activate);
-                    node.addEventListener('keydown', e => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        activate();
-                      }
-                    });
-                  });
-                })();
-              </script>
-            </div>
+                });
+              });
+            })();
+          </script>
+        </div>
             
         <!-- ══════════════════════════════════════════ -->
         <!-- I. RESEARCHERS & TEAMS -->
