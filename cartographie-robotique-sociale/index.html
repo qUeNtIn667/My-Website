@@ -267,15 +267,44 @@
                 <span class="lang-fr">🗺️ Cartographie de la Robotique Sociale Gérontologique en France</span>
             </p>
 
-            <div style="width: 100%; max-width: 900px; display: flex; justify-content: center;">
-                <img src="../Map-Social-Robotics.png" 
-                     alt="Map Social Robotics France" 
-                     style="width: 100%; height: auto; max-width: 100%; border: 1px solid var(--border); background: var(--card-bg); padding: 10px; transition: transform 0.3s ease;"
-                     onmouseover="this.style.transform='scale(1.01)'"
-                     onmouseout="this.style.transform='scale(1)'" />
-            </div>
+        <div class="map-container">
+          <svg viewBox="0 0 600 550" class="france-map">
+            <path class="france-shape" d="M180,60 L240,50 L280,45 L320,55 L360,40 L400,45 L440,55 L480,70 L500,100 L520,130 L530,160 L525,190 L515,220 L500,250 L480,280 L460,310 L440,340 L420,370 L400,400 L380,430 L360,460 L340,490 L320,520 L300,540 L280,530 L260,510 L240,480 L220,450 L200,420 L180,390 L160,360 L140,330 L120,300 L100,270 L85,240 L75,210 L70,180 L75,150 L85,120 L100,95 L120,75 L150,65 Z" />
+            
+            <g class="hub" data-region="idf">
+              <circle cx="280" cy="140" r="14" />
+              <text x="280" y="115" text-anchor="middle">Paris</text>
+            </g>
+            
+            <g class="hub" data-region="ara">
+              <circle cx="360" cy="280" r="12" />
+              <text x="360" y="305" text-anchor="middle">Grenoble / Lyon</text>
+            </g>
+            
+            <g class="city" data-region="nantes">
+              <circle cx="160" cy="180" r="6" />
+              <text x="160" y="170" text-anchor="middle">Nantes</text>
+            </g>
+            <g class="city" data-region="bordeaux">
+              <circle cx="140" cy="320" r="6" />
+              <text x="140" y="345" text-anchor="middle">Bordeaux</text>
+            </g>
+            <g class="city" data-region="nice">
+              <circle cx="420" cy="380" r="6" />
+              <text x="420" y="405" text-anchor="middle">Nice</text>
+            </g>
+            <g class="city" data-region="nancy">
+              <circle cx="420" cy="110" r="6" />
+              <text x="420" y="95" text-anchor="middle">Nancy</text>
+            </g>
+          </svg>
+          
+          <div id="map-info" class="map-info hidden">
+            <h4 id="map-title"></h4>
+            <ul id="map-list"></ul>
+          </div>
         </div>
-        
+            
         <!-- ══════════════════════════════════════════ -->
         <!-- I. RESEARCHERS & TEAMS -->
         <!-- ══════════════════════════════════════════ -->
