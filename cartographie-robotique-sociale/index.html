@@ -416,31 +416,33 @@
                 <text x="1250" y="870" text-anchor="middle" font-size="18" fill="#334155">Nice</text>
               </g>
             </svg>
-              const wrapper = document.currentScript.closest('.map-wrapper');
-              const panel = wrapper.querySelector('#map-info');
-              const titleEl = wrapper.querySelector('#map-title');
-              const listEl = wrapper.querySelector('#map-list');
-        
-              function openRegion(region) {
-                const data = labs[region];
-                if (!data) return;
-                titleEl.textContent = data.title;
-                listEl.innerHTML = data.list.map(l => '<li>' + l + '</li>').join('');
-                panel.classList.add('active');
-              }
-        
-              wrapper.querySelectorAll('.hub, .city').forEach(node => {
-                const activate = () => openRegion(node.dataset.region);
-                node.addEventListener('click', activate);
-                node.addEventListener('keydown', e => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    activate();
+            <script>
+                (function() {
+                  const wrapper = document.currentScript.closest('.map-wrapper');
+                  const panel = wrapper.querySelector('#map-info');
+                  const titleEl = wrapper.querySelector('#map-title');
+                  const listEl = wrapper.querySelector('#map-list');
+                
+                  function openRegion(region) {
+                    const data = labs[region];
+                    if (!data) return;
+                    titleEl.textContent = data.title;
+                    listEl.innerHTML = data.list.map(l => '<li>' + l + '</li>').join('');
+                    panel.classList.add('active');
                   }
-                });
-              });
-            })();
-          </script>
+                
+                  wrapper.querySelectorAll('.hub, .city').forEach(node => {
+                    const activate = () => openRegion(node.dataset.region);
+                    node.addEventListener('click', activate);
+                    node.addEventListener('keydown', e => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        activate();
+                      }
+                    });
+                  });
+                })();
+            </script>
         </div>
             
         <!-- ══════════════════════════════════════════ -->
