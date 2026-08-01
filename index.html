@@ -774,7 +774,6 @@
                     <span class="lang-fr">Aucune publication trouvée.</span>
                 </p>`;
         }
-    
         function showFallback(isTimeout) {
             const msg = isTimeout
                 ? '<span class="lang-en">Loading took too long. </span><span class="lang-fr">Chargement trop long. </span>'
@@ -789,6 +788,18 @@
                     </a>
                 </p>`;
         }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchPublications();
+            if (navigator.language.startsWith('fr')) {
+                body.classList.add('fr-mode');
+                langText.textContent = 'FR';
+            }
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                body.classList.remove('light-mode');
+                themeIcon.className = 'fas fa-sun';
+            }
+        });        
         </script>
     
         <script src="splide.min.js"></script>
