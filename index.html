@@ -617,190 +617,162 @@
     </a>
     
     <script>
-        const body = document.body;
-        const themeIcon = document.getElementById('theme-icon');
-        const langText = document.getElementById('lang-text');
-
-        document.getElementById('theme-toggle').addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            const isLight = body.classList.contains('light-mode');
-            themeIcon.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
-        });
-
-        document.getElementById('lang-toggle').addEventListener('click', () => {
-            body.style.opacity = '0';
-            setTimeout(() => {
-                body.classList.toggle('fr-mode');
-                langText.textContent = body.classList.contains('fr-mode') ? 'FR' : 'EN';
-                body.style.opacity = '1';
-            }, 150);
-        });
-
-        async function fetchPublications() {
-        const ORCID_ID = "0009-0004-9840-590X";
-        const CACHE_KEY = "orcid_works_cache";
-        const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 heures
-        const container = document.getElementById('pub-container');
+        (function() {
+            'use strict';
         
-        if (!container) return;
-
-        try {
-            const cached = localStorage.getItem(CACHE_KEY);
-            if (cached) {
-                const { timestamp, works } = JSON.parse(cached);
-                if (Date.now() - timestamp < CACHE_TTL) {
-                    renderWorks(works);
-                    return;
-                }
-            }
-        } catch (e) {
-        }
-    
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
-    
-        try {
-            const response = await fetch(
-                `https://pub.orcid.org/v3.0/${ORCID_ID}/works`,
-                {
-                    headers: { 'Accept': 'application/json' },
-                    signal: controller.signal
-                }
-            );
-            clearTimeout(timeoutId);
-    
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    
-            const data = await response.json();
-            const works = data.group || [];
-    
-            if (works.length === 0) {
-                showEmpty();
-                return;
-            }
-    
-            const sorted = works.sort((a, b) => {
-                const yA = a['work-summary']?.[0]?.['publication-date']?.year?.value || 0;
-                const yB = b['work-summary']?.[0]?.['publication-date']?.year?.value || 0;
-                return yB - yA;
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const langText = document.getElementById('lang-text');
+        
+            document.getElementById('theme-toggle').addEventListener('click', () => {
+                body.classList.toggle('light-mode');
+                themeIcon.className = body.classList.contains('light-mode') ? 'fas fa-moon' : 'fas fa-sun';
             });
-    
-            try {
-                localStorage.setItem(CACHE_KEY, JSON.stringify({
-                    timestamp: Date.now(),
-                    works: sorted
-                }));
-            } catch (e) { /* ignore */ }
-    
-            renderWorks(sorted);
-    
-        } catch (err) {
-            clearTimeout(timeoutId);
-            const isTimeout = err.name === 'AbortError';
-            showFallback(isTimeout);
-        }
-    
-        function renderWorks(works) {
-            container.innerHTML = "";
-    
-            works.forEach(work => {
-                const s = work['work-summary']?.[0] || {};
-                const title = s.title?.title?.value || "Sans titre";
-                const year = s['publication-date']?.year?.value;
-                const type = formatType(s.type);
-                const url = resolveUrl(s);
-    
-                const row = document.createElement('div');
-                row.className = 'row-exp';
-    
-                const header = document.createElement('div');
-                header.className = 'row-header';
-    
-                const titleEl = document.createElement(url ? 'a' : 'span');
-                titleEl.className = 'row-main';
-                titleEl.style.fontWeight = 'bold';
-                titleEl.textContent = title;
-                if (url) {
-                    titleEl.href = url;
-                    titleEl.target = '_blank';
-                    titleEl.rel = 'noopener noreferrer';
-                    titleEl.style.textDecoration = 'underline';
-                    titleEl.style.textUnderlineOffset = '2px';
-                }
-    
-                const meta = document.createElement('span');
-                meta.className = 'row-date';
-                meta.textContent = [type, year].filter(Boolean).join(' · ') || 'N/A';
-    
-                header.appendChild(titleEl);
-                header.appendChild(meta);
-                row.appendChild(header);
-                container.appendChild(row);
+        
+            document.getElementById('lang-toggle').addEventListener('click', () => {
+                body.style.opacity = '0';
+                setTimeout(() => {
+                    body.classList.toggle('fr-mode');
+                    langText.textContent = body.classList.contains('fr-mode') ? 'FR' : 'EN';
+                    body.style.opacity = '1';
+                }, 150);
             });
-        }
-    
-        function resolveUrl(summary) {
-            const ids = summary['external-ids']?.['external-id'] || [];
-            const doi = ids.find(id => id['external-id-type'] === 'doi');
-            if (doi?.['external-id-value']) {
-                return `https://doi.org/${doi['external-id-value']}`;
+        
+            const ORCID_ID = "0009-0004-9840-590X";
+            const CACHE_KEY = "orcid_works_cache";
+            const CACHE_TTL = 86400000;
+            const container = document.getElementById('pub-container');
+        
+            async function fetchPublications() {
+                if (!container) return;
+        
+                try {
+                    const cached = localStorage.getItem(CACHE_KEY);
+                    if (cached) {
+                        const { timestamp, works } = JSON.parse(cached);
+                        if (Date.now() - timestamp < CACHE_TTL) {
+                            renderWorks(works);
+                            return;
+                        }
+                    }
+                } catch (e) {}
+        
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+        
+                try {
+                    const response = await fetch(
+                        `https://pub.orcid.org/v3.0/${ORCID_ID}/works`,
+                        { headers: { 'Accept': 'application/json' }, signal: controller.signal }
+                    );
+                    clearTimeout(timeoutId);
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
+                    const data = await response.json();
+                    const works = data.group || [];
+                    if (works.length === 0) { showEmpty(); return; }
+        
+                    const sorted = works.sort((a, b) => {
+                        const yA = a['work-summary']?.[0]?.['publication-date']?.year?.value || 0;
+                        const yB = b['work-summary']?.[0]?.['publication-date']?.year?.value || 0;
+                        return yB - yA;
+                    });
+        
+                    try {
+                        localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), works: sorted }));
+                    } catch (e) {}
+        
+                    renderWorks(sorted);
+        
+                } catch (err) {
+                    clearTimeout(timeoutId);
+                    showFallback(err.name === 'AbortError');
+                }
             }
-            if (summary.url?.value) return summary.url.value;
-            if (summary['put-code']) {
-                return `https://orcid.org/${ORCID_ID}/works/${summary['put-code']}`;
+        
+            function renderWorks(works) {
+                container.innerHTML = "";
+                works.forEach(work => {
+                    const s = work['work-summary']?.[0] || {};
+                    const title = s.title?.title?.value || "Sans titre";
+                    const year = s['publication-date']?.year?.value;
+                    const type = formatType(s.type);
+                    const url = resolveUrl(s);
+        
+                    const row = document.createElement('div');
+                    row.className = 'row-exp';
+        
+                    const header = document.createElement('div');
+                    header.className = 'row-header';
+        
+                    const titleEl = document.createElement(url ? 'a' : 'span');
+                    titleEl.className = 'row-main';
+                    titleEl.style.fontWeight = 'bold';
+                    titleEl.textContent = title;
+                    if (url) {
+                        titleEl.href = url;
+                        titleEl.target = '_blank';
+                        titleEl.rel = 'noopener noreferrer';
+                        titleEl.style.textDecoration = 'underline';
+                        titleEl.style.textUnderlineOffset = '2px';
+                    }
+        
+                    const meta = document.createElement('span');
+                    meta.className = 'row-date';
+                    meta.textContent = [type, year].filter(Boolean).join(' · ') || 'N/A';
+        
+                    header.appendChild(titleEl);
+                    header.appendChild(meta);
+                    row.appendChild(header);
+                    container.appendChild(row);
+                });
             }
-            return null;
-        }
-    
-        function formatType(raw) {
-            if (!raw) return '';
-            const map = {
-                'journal-article': 'Journal Article',
-                'conference-paper': 'Conference Paper',
-                'book-chapter': 'Book Chapter',
-                'preprint': 'Preprint',
-                'dissertation': 'Dissertation',
-                'report': 'Report',
-                'data-set': 'Dataset'
-            };
-            return map[raw] || raw.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-        }
-    
-        function showEmpty() {
-            container.innerHTML = `
-                <p>
-                    <span class="lang-en">No publications found.</span>
-                    <span class="lang-fr">Aucune publication trouvée.</span>
-                </p>`;
-        }
-        function showFallback(isTimeout) {
-            const msg = isTimeout
-                ? '<span class="lang-en">Loading took too long. </span><span class="lang-fr">Chargement trop long. </span>'
-                : '<span class="lang-en">Unable to load publications. </span><span class="lang-fr">Impossible de charger les publications. </span>';
+        
+            function resolveUrl(summary) {
+                const ids = summary['external-ids']?.['external-id'] || [];
+                const doi = ids.find(id => id['external-id-type'] === 'doi');
+                if (doi?.['external-id-value']) return `https://doi.org/${doi['external-id-value']}`;
+                if (summary.url?.value) return summary.url.value;
+                if (summary['put-code']) return `https://orcid.org/${ORCID_ID}/works/${summary['put-code']}`;
+                return null;
+            }
+        
+            function formatType(raw) {
+                if (!raw) return '';
+                const map = {
+                    'journal-article': 'Journal Article',
+                    'conference-paper': 'Conference Paper',
+                    'book-chapter': 'Book Chapter',
+                    'preprint': 'Preprint',
+                    'dissertation': 'Dissertation',
+                    'report': 'Report',
+                    'data-set': 'Dataset'
+                };
+                return map[raw] || raw.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            }
+        
+            function showEmpty() {
+                container.innerHTML = '<p><span class="lang-en">No publications found.</span><span class="lang-fr">Aucune publication trouvée.</span></p>';
+            }
+        
+            function showFallback(isTimeout) {
+                const msg = isTimeout
+                    ? '<span class="lang-en">Loading took too long. </span><span class="lang-fr">Chargement trop long. </span>'
+                    : '<span class="lang-en">Unable to load publications. </span><span class="lang-fr">Impossible de charger les publications. </span>';
+                container.innerHTML = `<p>${msg}<a href="https://orcid.org/${ORCID_ID}" target="_blank" rel="noopener"><span class="lang-en">See ORCID profile →</span><span class="lang-fr">Voir le profil ORCID →</span></a></p>`;
+            }
             
-            container.innerHTML = `
-                <p>
-                    ${msg}
-                    <a href="https://orcid.org/${ORCID_ID}" target="_blank" rel="noopener">
-                        <span class="lang-en">See ORCID profile →</span>
-                        <span class="lang-fr">Voir le profil ORCID →</span>
-                    </a>
-                </p>`;
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
             fetchPublications();
             if (navigator.language.startsWith('fr')) {
                 body.classList.add('fr-mode');
-                langText.textContent = 'FR';
+                if (langText) langText.textContent = 'FR';
             }
             if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
                 body.classList.remove('light-mode');
-                themeIcon.className = 'fas fa-sun';
-            }
-        });        
-        </script>
-    
+                if (themeIcon) themeIcon.className = 'fas fa-sun';
+                    }
+            })();
+        </script>   
         <script src="splide.min.js"></script>
         <script src="splide-auto-scroll.min.js"></script>
         
