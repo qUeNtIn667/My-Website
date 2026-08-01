@@ -9,56 +9,103 @@
     <meta name="description" content="Quentin Gaie, Programme Rob'Zheimer (INSEI & CY University & Les Diaconesses de Reuilly). Expert en Interaction Homme-Robot, Neuropsychologie et Maladie d'Alzheimer.">
     <link rel="canonical" href="https://quentin.gaie.fr/">
     <meta name="google-site-verification" content="cTALKGDo5KxIRNQJkxP41jFxuMC4s9G3xLaB7CEn9nA" />
-
+    
     <meta property="og:title" content="Quentin Gaie | PhD Researcher">
     <meta property="og:description" content="PhD Researcher specializing in Human-Robot Interaction and Alzheimer's disease. Bridging Cognitive Sciences and Applied Human Factors.">
     <meta property="og:image" content="https://quentin.gaie.fr/assets/og-card.webp">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Quentin Gaie — PhD Researcher in Human-Robot Interaction & Alzheimer's disease">
+
     <meta property="og:url" content="https://quentin.gaie.fr/">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:locale:alternate" content="en_US">
 
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://quentin.gaie.fr/og-card.webp">
     <meta name="twitter:title" content="Quentin Gaie | PhD Researcher">
     <meta name="twitter:description" content="PhD student specializing in Human-Robot Interaction and Alzheimer's disease.">
 
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
     <script type="application/ld+json">
-    {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Quentin Gaie",
-    "url": "https://quentin.gaie.fr",
-    "jobTitle": "PhD Researcher",
-    "description": "Responsable Recherche Clinique pour le programme Rob'Zheimer.",
-    "affiliation": [
         {
-        "@type": "Organization",
-        "name": "Programme Rob'Zheimer"
-        },
-        {
-        "@type": "Organization",
-        "name": "INSEI"
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Person",
+              "@id": "https://quentin.gaie.fr/#person",
+              "name": "Quentin Gaie",
+              "url": "https://quentin.gaie.fr",
+              "image": "https://quentin.gaie.fr/assets/photo-profil.jpg",
+              "jobTitle": "PhD Researcher",
+              "description": "Responsable Recherche Clinique pour le programme Rob'Zheimer. Spécialiste en Interaction Homme-Robot et neuropsychologie de la maladie d'Alzheimer.",
+              "affiliation": [
+                {
+                  "@type": "Organization",
+                  "name": "CY Cergy Paris Université",
+                  "sameAs": "https://www.cyu.fr"
+                },
+                {
+                  "@type": "Organization",
+                  "name": "INSEI",
+                  "sameAs": "https://www.insei.fr"
+                },
+                {
+                  "@type": "Organization",
+                  "name": "Les Diaconesses de Reuilly"
+                }
+              ],
+              "alumniOf": [
+                {
+                  "@type": "CollegeOrUniversity",
+                  "name": "Université Lumière Lyon 2",
+                  "sameAs": "https://www.univ-lyon2.fr"
+                },
+                {
+                  "@type": "CollegeOrUniversity",
+                  "name": "Université Sorbonne Paris Nord",
+                  "sameAs": "https://www.univ-spn.fr"
+                }
+              ],
+              "knowsAbout": [
+                "Human-Robot Interaction",
+                "Social Robotics",
+                "Neuropsychology",
+                "Alzheimer's Disease",
+                "Non-Pharmacological Interventions",
+                "Robot-Mediated Intervention"
+              ],
+              "sameAs": [
+                "https://www.linkedin.com/in/quentin-gaie-9b2713230/",
+                "https://orcid.org/0009-0004-9840-590X",
+                "https://github.com/QuentinGaie",
+                "https://www.researchgate.net/profile/Quentin-Gaie",
+                "https://www.insei.fr/recherche/quentin-gaie",
+                "https://theses.fr/s423227"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://quentin.gaie.fr/#website",
+              "url": "https://quentin.gaie.fr",
+              "name": "Quentin Gaie | PhD Researcher",
+              "inLanguage": ["fr", "en"],
+              "publisher": { "@id": "https://quentin.gaie.fr/#person" }
+            }
+          ]
         }
-    ],
-    "knowsAbout": ["Rob'Zheimer", "Human-Robot Interaction", "Alzheimer's Disease", "Neuropsychology"],
-    "sameAs": [
-        "https://www.linkedin.com/in/quentin-gaie-9b2713230/",
-        "https://orcid.org/0009-0004-9840-590X",
-        "https://github.com/QuentinGaie",
-        "https://www.researchgate.net/profile/Quentin-Gaie",
-        "https://www.insei.fr/recherche/quentin-gaie",
-        "https://theses.fr/s423227"
-    ]
-    }
     </script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://plausible.io">
     <link rel="icon" type="image/png" sizes="96x96" href="https://quentin.gaie.fr/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap&font-display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="preload" href="style.css" as="style">
     <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="splide.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/all.min.css">
     
     <style>
@@ -594,115 +641,204 @@
         });
 
         async function fetchPublications() {
-            const orcidId = "0009-0004-9840-590X";
-            const container = document.getElementById('pub-container');
-            
-            try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 5000);
+        const ORCID_ID = "0009-0004-9840-590X";
+        const CACHE_KEY = "orcid_works_cache";
+        const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 heures
+        const container = document.getElementById('pub-container');
+        
+        if (!container) return;
 
-                const response = await fetch(`https://pub.orcid.org/v3.0/${orcidId}/works`, {
-                    headers: { 'Accept': 'application/json' },
-                    signal: controller.signal
-                });
-                clearTimeout(timeoutId);
-                
-                const data = await response.json();
-                const works = data.group;
-
-                if (!works || works.length === 0) {
-                    container.innerHTML = '<p><span class="lang-en">No publications found.</span><span class="lang-fr">Aucune publication trouvée.</span></p>';
+        try {
+            const cached = localStorage.getItem(CACHE_KEY);
+            if (cached) {
+                const { timestamp, works } = JSON.parse(cached);
+                if (Date.now() - timestamp < CACHE_TTL) {
+                    renderWorks(works);
                     return;
                 }
-
-                container.innerHTML = "";
-                works.forEach(work => {
-                    const details = work['work-summary'][0];
-                    const titleStr = details.title.title.value;
-                    const yearStr = details['publication-date'] ? details['publication-date'].year.value : "N/A";
-                    
-                    const div = document.createElement('div');
-                    div.className = 'row-exp';
-                    
-                    const header = document.createElement('div');
-                    header.className = 'row-header';
-                    
-                    const titleSpan = document.createElement('span');
-                    titleSpan.className = 'row-main';
-                    titleSpan.style.fontWeight = 'bold';
-                    titleSpan.textContent = titleStr;
-                    
-                    const dateSpan = document.createElement('span');
-                    dateSpan.className = 'row-date';
-                    dateSpan.textContent = yearStr;
-                    
-                    header.appendChild(titleSpan);
-                    header.appendChild(dateSpan);
-                    div.appendChild(header);
-                    container.appendChild(div);
-                });
-
-            } catch (err) {
-                container.innerHTML = '<p><span class="lang-en">Check my ORCID profile.</span><span class="lang-fr">Consultez mon profil ORCID.</span></p>';
             }
+        } catch (e) {
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            fetchPublications();
-            if (navigator.language.startsWith('fr')) {
-                body.classList.add('fr-mode');
-                langText.textContent = 'FR';
-            }
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                body.classList.remove('light-mode');
-                themeIcon.className = 'fas fa-sun';
-            }
-        });
-    </script>
-
-    <script src="splide.min.js"></script>
-    <script src="splide-auto-scroll.min.js"></script>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            try {
-                if (typeof Splide === 'undefined') return;
-        
-                var splide = new Splide('#partner-carousel', {
-                    type       : 'loop',
-                    drag       : 'free',
-                    focus      : 'center',
-                    autoWidth  : true,
-                    gap        : '50px',
-                    arrows     : false,
-                    pagination : false,
-                    autoScroll : {
-                        speed        : 1,
-                        pauseOnHover : true,
-                        pauseOnFocus : false,
-                    },
-                    breakpoints: {
-                        640: { gap: '30px' }
-                    }
-                });
-                
-                var autoScrollExt = null;
-                if (window.splide && window.splide.Extensions && window.splide.Extensions.AutoScroll) {
-                    autoScrollExt = window.splide.Extensions.AutoScroll;
-                } else if (window.SplideAutoScroll && window.SplideAutoScroll.AutoScroll) {
-                    autoScrollExt = window.SplideAutoScroll.AutoScroll;
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+    
+        try {
+            const response = await fetch(
+                `https://pub.orcid.org/v3.0/${ORCID_ID}/works`,
+                {
+                    headers: { 'Accept': 'application/json' },
+                    signal: controller.signal
                 }
-        
-                if (autoScrollExt) {
-                    splide.mount({ AutoScroll: autoScrollExt });
-                } else {
-                    splide.mount();
-                }
-            } catch (e) {
-                console.error("Erreur d'initialisation Splide :", e);
+            );
+            clearTimeout(timeoutId);
+    
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
+            const data = await response.json();
+            const works = data.group || [];
+    
+            if (works.length === 0) {
+                showEmpty();
+                return;
             }
-        });
+    
+            const sorted = works.sort((a, b) => {
+                const yA = a['work-summary']?.[0]?.['publication-date']?.year?.value || 0;
+                const yB = b['work-summary']?.[0]?.['publication-date']?.year?.value || 0;
+                return yB - yA;
+            });
+    
+            try {
+                localStorage.setItem(CACHE_KEY, JSON.stringify({
+                    timestamp: Date.now(),
+                    works: sorted
+                }));
+            } catch (e) { /* ignore */ }
+    
+            renderWorks(sorted);
+    
+        } catch (err) {
+            clearTimeout(timeoutId);
+            const isTimeout = err.name === 'AbortError';
+            showFallback(isTimeout);
+        }
+    
+        function renderWorks(works) {
+            container.innerHTML = "";
+    
+            works.forEach(work => {
+                const s = work['work-summary']?.[0] || {};
+                const title = s.title?.title?.value || "Sans titre";
+                const year = s['publication-date']?.year?.value;
+                const type = formatType(s.type);
+                const url = resolveUrl(s);
+    
+                const row = document.createElement('div');
+                row.className = 'row-exp';
+    
+                const header = document.createElement('div');
+                header.className = 'row-header';
+    
+                const titleEl = document.createElement(url ? 'a' : 'span');
+                titleEl.className = 'row-main';
+                titleEl.style.fontWeight = 'bold';
+                titleEl.textContent = title;
+                if (url) {
+                    titleEl.href = url;
+                    titleEl.target = '_blank';
+                    titleEl.rel = 'noopener noreferrer';
+                    titleEl.style.textDecoration = 'underline';
+                    titleEl.style.textUnderlineOffset = '2px';
+                }
+    
+                const meta = document.createElement('span');
+                meta.className = 'row-date';
+                meta.textContent = [type, year].filter(Boolean).join(' · ') || 'N/A';
+    
+                header.appendChild(titleEl);
+                header.appendChild(meta);
+                row.appendChild(header);
+                container.appendChild(row);
+            });
+        }
+    
+        function resolveUrl(summary) {
+            const ids = summary['external-ids']?.['external-id'] || [];
+            const doi = ids.find(id => id['external-id-type'] === 'doi');
+            if (doi?.['external-id-value']) {
+                return `https://doi.org/${doi['external-id-value']}`;
+            }
+            if (summary.url?.value) return summary.url.value;
+            if (summary['put-code']) {
+                return `https://orcid.org/${ORCID_ID}/works/${summary['put-code']}`;
+            }
+            return null;
+        }
+    
+        function formatType(raw) {
+            if (!raw) return '';
+            const map = {
+                'journal-article': 'Journal Article',
+                'conference-paper': 'Conference Paper',
+                'book-chapter': 'Book Chapter',
+                'preprint': 'Preprint',
+                'dissertation': 'Dissertation',
+                'report': 'Report',
+                'data-set': 'Dataset'
+            };
+            return map[raw] || raw.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        }
+    
+        function showEmpty() {
+            container.innerHTML = `
+                <p>
+                    <span class="lang-en">No publications found.</span>
+                    <span class="lang-fr">Aucune publication trouvée.</span>
+                </p>`;
+        }
+    
+        function showFallback(isTimeout) {
+            const msg = isTimeout
+                ? '<span class="lang-en">Loading took too long. </span><span class="lang-fr">Chargement trop long. </span>'
+                : '<span class="lang-en">Unable to load publications. </span><span class="lang-fr">Impossible de charger les publications. </span>';
+            
+            container.innerHTML = `
+                <p>
+                    ${msg}
+                    <a href="https://orcid.org/${ORCID_ID}" target="_blank" rel="noopener">
+                        <span class="lang-en">See ORCID profile →</span>
+                        <span class="lang-fr">Voir le profil ORCID →</span>
+                    </a>
+                </p>`;
+        }
+        </script>
+    
+        <script src="splide.min.js"></script>
+        <script src="splide-auto-scroll.min.js"></script>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                try {
+                    if (typeof Splide === 'undefined') return;
+            
+                    var splide = new Splide('#partner-carousel', {
+                        type       : 'loop',
+                        drag       : 'free',
+                        focus      : 'center',
+                        autoWidth  : true,
+                        gap        : '50px',
+                        arrows     : false,
+                        pagination : false,
+                        autoScroll : {
+                            speed        : 1,
+                            pauseOnHover : true,
+                            pauseOnFocus : false,
+                        },
+                        breakpoints: {
+                            640: { gap: '30px' }
+                        }
+                    });
+                    
+                    var autoScrollExt = null;
+                    if (window.splide && window.splide.Extensions && window.splide.Extensions.AutoScroll) {
+                        autoScrollExt = window.splide.Extensions.AutoScroll;
+                    } else if (window.SplideAutoScroll && window.SplideAutoScroll.AutoScroll) {
+                        autoScrollExt = window.SplideAutoScroll.AutoScroll;
+                    }
+            
+                    if (autoScrollExt) {
+                        splide.mount({ AutoScroll: autoScrollExt });
+                    } else {
+                        splide.mount();
+                    }
+                } catch (e) {
+                    console.error("Erreur d'initialisation Splide :", e);
+                }
+            });
     </script>
+
+    <script type="module"></script>
         
 </body>
 </html>
