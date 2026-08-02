@@ -452,16 +452,47 @@
             <script>
                 (function() {
                   const wrapper = document.currentScript.closest('.map-wrapper');
-                  const panel = wrapper.querySelector('#map-info');
+                  const panel   = wrapper.querySelector('#map-info');
                   const titleEl = wrapper.querySelector('#map-title');
-                  const listEl = wrapper.querySelector('#map-list');
+                
+                  const regionNames = {
+                    idf: 'Paris & Île-de-France',
+                    ara: 'Auvergne-Rhône-Alpes',
+                    pdl: 'Pays de la Loire',
+                    naq: 'Nouvelle-Aquitaine',
+                    occ: 'Occitanie',
+                    pac: "Provence-Alpes-Côte d'Azur",
+                    ges: 'Grand Est'
+                  };
                 
                   function openRegion(region) {
-                    const data = labs[region];
-                    if (!data) return;
-                    titleEl.textContent = data.title;
-                    listEl.innerHTML = data.list.map(l => '<li>' + l + '</li>').join('');
-                    panel.classList.add('active');
+                    const allCards = document.querySelectorAll('#researchers .inst-card');
+                    let count = 0;
+                
+                    allCards.forEach(card => {
+                      if (card.dataset.region === region) {
+                        card.style.display = '';
+                        card.classList.add('map-highlight');
+                        count++;
+                      } else {
+                        card.style.display = 'none';
+                        card.classList.remove('map-highlight');
+                      }
+                    });
+                    if (panel && titleEl) {
+                      titleEl.textContent = (regionNames[region] || region)
+                                          + ' — ' + count + ' laboratoire' + (count > 1 ? 's' : '');
+                      panel.classList.add('active');
+                    }
+                    document.getElementById('researchers')
+                            .scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                  function resetFilter() {
+                    document.querySelectorAll('#researchers .inst-card').forEach(c => {
+                      c.style.display = '';
+                      c.classList.remove('map-highlight');
+                    });
+                    if (panel) panel.classList.remove('active');
                   }
                 
                   wrapper.querySelectorAll('.hub, .city').forEach(node => {
@@ -474,14 +505,18 @@
                       }
                     });
                   });
+                
+                  if (panel) {
+                    const btn = document.createElement('button');
+                    btn.textContent = '✕ Tout afficher';
+                    btn.className = 'map-reset-btn';
+                    btn.onclick = resetFilter;
+                    panel.appendChild(btn);
+                  }
                 })();
             </script>
         </div>
-            
-        <!-- ══════════════════════════════════════════ -->
-        <!-- I. RESEARCHERS & TEAMS -->
-        <!-- ══════════════════════════════════════════ -->
-        
+
 <section id="researchers">
             <h2 class="section-title">
                 <span class="lang-en">I. Researchers & Teams in Gerontological Social Robotics</span>
@@ -490,7 +525,7 @@
 
             <div class="card-grid">
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="idf">
                     <p class="inst-name">Grhapes / INSEI — CY Cergy Paris Université</p>
                     <p class="inst-focus"><span class="lang-en">Robotic mediations, Robot-Extension paradigm</span><span class="lang-fr">Médiations robotiques, paradigme Robot-Extension</span></p>
                     <div class="researcher-list">
@@ -505,7 +540,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="idf">
                     <span class="star-badge" title="SPRING H2020 Collaboration">🌟SPRING H2020 Collaboration</span>
                     <p class="inst-name">Broca Living Lab — Université Paris Cité / AP-HP</p>
                     <p class="inst-focus"><span class="lang-en">Cognitive psychology orientation</span><span class="lang-fr">Orientation psychologie cognitive</span></p>
@@ -529,7 +564,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="idf">
                     <p class="inst-name">Cyberpsychologie - Université Paris-Cité</p>
                     <p class="inst-focus"><span class="lang-en">Psychodynamic / psychoanalytic orientation</span><span class="lang-fr">Orientation psychodynamique / psychanalyse</span></p>
                     <div class="researcher-list">
@@ -544,7 +579,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="idf">
                     <p class="inst-name">ISIR — Sorbonne Université / CNRS</p>
                     <p class="inst-focus"><span class="lang-en">Interactive & autonomous robotics, human interaction</span><span class="lang-fr">Robotique interactive et autonome, interaction humaine</span></p>
                     <div class="researcher-list">
@@ -555,7 +590,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="idf">
                     <p class="inst-name">ETIS — CY Cergy Paris Université</p>
                     <p class="inst-focus"><span class="lang-en">Human-robot interaction modelling, emotions, embodied cognition</span><span class="lang-fr">Modélisation IHR, émotions, cognition incarnée</span></p>
                     <div class="researcher-list">
@@ -570,7 +605,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card" style="position: relative; padding-bottom: 45px;">
+                <div class="inst-card" data-region="ara" style="position: relative; padding-bottom: 45px;">
                     <span class="star-badge" title="SPRING H2020 Collaboration">🌟 SPRING H2020 Collaboration</span>
                     <p class="inst-name">Inria Grenoble - Université Grenoble Alpes</p>
                     <p class="inst-focus">
@@ -592,7 +627,7 @@
                     </div>
                 </div>
                 
-                <div class="inst-card">
+                <div class="inst-card" data-region="ara">
                     <p class="inst-name">LIG — Université Grenoble-Alpes</p>
                     <p class="inst-focus"><span class="lang-en">Conversational robots, affective signal, speech, dialogue</span><span class="lang-fr">Robots conversationnels, signal affectif, parole, dialogue</span></p>
                     <div class="researcher-list">
@@ -607,7 +642,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="idf">
                     <p class="inst-name">LISN — Paris-Saclay</p>
                     <p class="inst-focus">AI, éthique robotique, TAL, affect computationnel</p>
                     <div class="researcher-list">
@@ -618,7 +653,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="pdl">
                     <p class="inst-name">LS2N — Centrale Nantes</p>
                     <p class="inst-focus">Rob'Autisme, CHU Nantes</p>
                     <div class="researcher-list">
@@ -629,7 +664,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="ara">
                     <p class="inst-name">LAPSCO — Université Clermont-Auvergne / CNRS</p>
                     <p class="inst-focus"><span class="lang-en">Social cognitive psychology. Robotic co-presence effects</span><span class="lang-fr">Psychologie sociale cognitive. Effets de la co-présence robotique</span></p>
                     <div class="researcher-list">
@@ -644,7 +679,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="naq">
                     <p class="inst-name">Inria Bordeaux - Université de Bordeaux</p>
                     <p class="inst-focus"><span class="lang-en">Autonomous learning & robotic remediation</span><span class="lang-fr">Apprentissage autonome & remédiation robotique</span></p>
                     <div class="researcher-list">
@@ -659,7 +694,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="ara">
                     <p class="inst-name">EMC — Université Lumière Lyon 2</p>
                     <p class="inst-focus"><span class="lang-en">Cognitive Sciences & Neuropsychology</span><span class="lang-fr">Sciences Cognitives & Neuropsychologie</span></p>
                     <div class="researcher-list">
@@ -670,7 +705,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="idf">
                     <p class="inst-name">IM2A — AP-HP Pitié-Salpêtrière / Sorbonne Université</p>
                     <p class="inst-focus"><span class="lang-en">Memory and Alzheimer's Clinical Research</span><span class="lang-fr">Recherche clinique sur la mémoire et Alzheimer</span></p>
                     <div class="researcher-list">
@@ -681,7 +716,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="idf">
                     <p class="inst-name">AP-HP Charles Foix / Sorbonne Université</p>
                     <p class="inst-focus"><span class="lang-en">Neurogeriatrics</span><span class="lang-fr">Neurogériatrie</span></p>
                     <div class="researcher-list">
@@ -692,7 +727,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="pac">
                     <p class="inst-name">Inria Nice / CHU Nice - Université Côte d'Azur</p>
                     <p class="inst-focus"><span class="lang-en">Cognition, Behavior & Technology</span><span class="lang-fr">Cognition, comportement et technologie</span></p>
                     <div class="researcher-list">
@@ -707,7 +742,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="idf">
                     <p class="inst-name">CHArt — Université Paris 8</p>
                     <p class="inst-focus"><span class="lang-en">Human and Artificial Cognition</span><span class="lang-fr">Cognition Humaine et Artificielle</span></p>
                     <div class="researcher-list">
@@ -718,7 +753,7 @@
                     </div>
                 </div>
 
-                <div class="inst-card">
+                <div class="inst-card" data-region="naq">
                     <p class="inst-name">Université de Limoges</p>
                     <p class="inst-focus"><span class="lang-en">Robots in healthcare mediation</span><span class="lang-fr">Robots en médiation de santé</span></p>
                     <div class="researcher-list">
@@ -729,7 +764,7 @@
                     </div>
                 </div>
 
-              <div class="inst-card">
+              <div class="inst-card" data-region="occ">
                     <p class="inst-name">DIS — Université de Nîmes</p>
                     <p class="inst-focus"><span class="lang-en">Design and Social Innovation</span><span class="lang-fr">Design et Innovation Sociale</span></p>
                     <div class="researcher-list">
